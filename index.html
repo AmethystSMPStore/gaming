@@ -33,8 +33,12 @@ canvas {
   z-index:9
 }
 #menu {
-  background:radial-gradient(circle at 30% 20%,#2b3340,var(--bg) 70%)
+  background:linear-gradient(90deg,#0c2a66 0,#0e1116 45%,#0e1116 55%,#6a3008 100%)
 }
+.box{border-color:#4a8aff55!important;box-shadow:0 0 30px #1a4aff22}
+#ar{position:fixed;inset:0;z-index:25;display:none;align-items:center;justify-content:center;background:#000c}
+.wc{flex:1;min-width:120px;padding:8px;border:1px solid;border-radius:6px;background:#fff1;font-size:13px;font-weight:700}
+.wc small{display:block;font-weight:400;color:#bbb}
 #ov {
   background:#000a;
   display:none;
@@ -382,7 +386,7 @@ input[type=range] {
     transform:translate(0,-88px) scale(.9)
   }
 }
-#sb{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:min(880px,96vw);background:#0b0e14e6;border:1px solid #fff3;border-radius:8px;z-index:10;display:none;pointer-events:none;font-size:15px}#sb table{width:100%;border-collapse:collapse}#sb th{color:#9aa;font-size:12px;letter-spacing:2px;padding:6px 10px;text-align:right}#sb td{padding:5px 10px;text-align:right}#sb th:first-child,#sb td:first-child{text-align:left}#sb .h1 td{font-weight:800;letter-spacing:2px;padding:8px 10px}#sb tr.me td{background:#fff2;font-weight:700}#vg {
+#sb{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:min(900px,96vw);background:linear-gradient(#0a1428f0,#080c16f0);border:1px solid #2a6ad8aa;box-shadow:0 0 40px #1a4aff44;border-radius:8px;z-index:10;display:none;pointer-events:none;font-size:15px}#sb table{width:100%;border-collapse:collapse}#sb th{color:#9aa;font-size:12px;letter-spacing:2px;padding:6px 10px;text-align:right}#sb td{padding:5px 10px;text-align:right}#sb th:first-child,#sb td:first-child{text-align:left}#sb .h1 td{font-weight:800;letter-spacing:2px;padding:8px 10px}#sb tr.me td{background:#fff2;font-weight:700}.tb{display:flex;align-items:center;gap:10px;padding:6px 10px}.tb .sc{width:120px;text-align:center;flex:none}.tb .sc b{display:flex;margin:0 auto;width:62px;height:62px;border-radius:50%;border:3px solid;align-items:center;justify-content:center;font-size:30px;background:#0008}.tb .sc small{display:block;font-size:10px;letter-spacing:1px;margin-top:3px;color:#cde}.tb table{flex:1}#vg {
   position:fixed;
   inset:0;
   pointer-events:none;
@@ -579,7 +583,7 @@ body.t #cdn {
 #rl>div{min-width:150px}#rl b{display:block;margin-bottom:6px;letter-spacing:2px}#rl>div>div{padding:2px 0}
 body.t #rl{font-size:12px;top:46%;gap:18px;padding:8px 12px}
 </style></head><body>
-<div id="menu"><div class="box"><h1>CS<span>BROWSER ONLINE</span></h1>
+<div id="menu"><div class="box"><div style="display:flex;justify-content:space-between;font-weight:800;letter-spacing:2px;font-size:13px"><span style="color:#6ea8ff">CT · COUNTER-TERRORISTS</span><span style="color:#f5a623">T · TERRORISTS</span></div><h1>CS<span>BROWSER ONLINE</span></h1>
 <p class="s" id="cl" style="margin:6px 0 0"></p>
 <h3 id="kh" style="color:#ffd24a;margin-top:10px"></h3>
 <label class="s">Player name<input id="nm" maxlength="12" value="Player"></label>
@@ -651,7 +655,7 @@ const SAVE=()=>{
   try{
     localStorage.setItem('csst',JSON.stringify(ST))
   }catch(e){}
-  cloudSoon()
+  accSave();cloudSoon()
 };
 let WS={
   coins:300,inv:[],eq:{}
@@ -665,7 +669,7 @@ const saveW=()=>{
   try{
     localStorage.setItem('csw',JSON.stringify(WS))
   }catch(e){}
-  cloudSoon()
+  accSave();cloudSoon()
 };
 const SK=[['Original',null,0],['Ice',0x3a8bd5,0],['Blood',0xb01818,0],['Toxic',0x3ac43a,0],['Neon Violet',0x8a3aff,1],['Gold',0xe8b923,2],['Carbon',0x2a2a33,0],['Bubble Pink',0xff6fb5,1],['Fire',0xff7a18,1],['Chrome',0xd0d8e0,2],['Royal Blue',0x1f3fbf,0],['Camo',0x5a6b3a,0],['Emerald',0x00c070,1],['Pearl',0xf2f2f2,1],['Ocean Fade',0x00d4ff,2],['Magma',0xff3b00,2],['Galaxy',0x6a3dff,2],['Gold Arabesque',0xc8a02a,2],['Marble Fade',0xd9482f,2],['Printstream',0xe9ecef,2],['Gamma Doppler',0x20c6b0,2],['Fade',0xf0a030,2],['Doppler',0x3a6ad8,2]];
 const SETS=[['Mouse & view'],['sens','Sensitivity',.2,3,.05],['scs','Scope sensitivity',.3,2,.05],['fov','Field of view (FOV)',60,110,1],['Sound'],['vol','Master volume',0,1,.05],['vg','Weapon volume',0,1.5,.05],['vs','Footsteps/effects volume',0,1.5,.05],['Crosshair'],['chs','Length',0,20,1],['cht','Thickness',1,6,1],['chg','Gap',0,15,1],['chd','Center dot (0/1)',0,1,1],['cho','Opacity',.2,1,.05],['chc','Color','color'],['Other'],['dmg','Show damage (0/1)',0,1,1],['shd','Shadows (0/1)',0,1,1]];
@@ -2172,7 +2176,7 @@ function shoot(){
       dmgPop(dl,hs,kl);
       impact(h.point,nr,0xb01414,hs?10:7,2.4);
       if(b){
-        b.hp-=dm;
+        b.hp-=dm;b.pd=1;
         if(b.hp<=0)killBot(b,hs)
       }else if(room&&!QM)room.emit('hit',{
         to:ud.peer,d:dm
@@ -2218,7 +2222,7 @@ function stab(w){
     dmgPop(dl,false,kl);
     impact(h.point,nr,0xb01414,7,2.4);
     if(b){
-      b.hp-=dm;
+      b.hp-=dm;b.pd=1;
       if(b.hp<=0)killBot(b,false)
     }else if(room&&!QM)room.emit('hit',{
       to:ud.peer,d:dm
@@ -2226,10 +2230,11 @@ function stab(w){
   }
 }
 function killBot(b,hs){
+  asst(b,myName);
   kadd(myName,myTeam);sbr(b.name||'Bot',1-myTeam).d++;
   dropW(b.wi,b.g.position);
   P.money=Math.min(16000,P.money+300);
-  WS.coins+=15;
+  WS.coins+=Math.round(15*cm());
   saveW();
   S.remove(b.g);
   bots=bots.filter(x=>x!==b);
@@ -2277,7 +2282,7 @@ function end(w){
   P.money=Math.min(16000,P.money+((myTeam===w)?3250:1400));
   banner=(w===0?'Counter-Terrorists':'Terrorists')+' win the round';
   if(s0>=5||s1>=5){
-    const win=(myTeam===(s0>=5?0:1)),g=win?400:150;
+    const win=(myTeam===(s0>=5?0:1)),g=Math.round((win?400:150)*cm());
     WS.coins+=g;
     saveW();
     banner=(win?'🏆 You won the match!':'You lost the match')+' · +'+g+' coins';
@@ -3473,6 +3478,7 @@ function spawnAllies(){
   }
 }
 function allyKill(e,a){
+  asst(e,a.name);
   kadd(a.name,myTeam);sbr(e.name,1-myTeam).d++;
   dropW(e.wi,e.g.position);
   S.remove(e.g);
@@ -3520,7 +3526,7 @@ function allyTick(dt){
       a.cd=.3+Math.random()*.2;
       const e=a.tg,q=e.g.position,ed=Math.hypot(q.x-p.x,q.z-p.z);
       const m=new T.Vector3(p.x,p.y+1.3,p.z),en=new T.Vector3(q.x,q.y+1.2,q.z);
-      if(Math.random()<Math.max(.1,.5-ed/80)){e.hp-=WP[a.wi].d*.5;if(e.hp<=0){allyKill(e,a);a.tg=null}}
+      if(Math.random()<Math.max(.1,.5-ed/80)){e.hp-=WP[a.wi].d*.5;(e.ad=e.ad||new Set()).add(a.name);if(e.hp<=0){allyKill(e,a);a.tg=null}}
       else en.add(new T.Vector3((Math.random()-.5)*2,(Math.random()-.5)*1.4,(Math.random()-.5)*2));
       line(m,en,0x6ec0ff);
       shotSnd(a.wi,p,.9);
@@ -3597,7 +3603,8 @@ function pickRow(id,vals,cur,lab,sub,set){
     $(id).appendChild(e);
   });
 }
-pickRow('bots',[5,10,15],BOTN,n=>n+' bots',n=>n===5?'easy':n===10?'normal':'hard',n=>{
+const CM={5:1,10:1.5,15:2,20:3,30:4},cm=()=>QM||online?1:(CM[BOTN]||1);
+pickRow('bots',[5,10,15,20,30],BOTN,n=>n+' bots',n=>({5:'easy',10:'normal',15:'hard',20:'very hard',30:'insane'})[n]+' · x'+CM[n]+' coins',n=>{
   BOTN=n
 });
 pickRow('waits',[10,20,30],WAITS,n=>n+' s',n=>'until the match starts',n=>{
@@ -3629,8 +3636,8 @@ $('go').onclick=()=>{
   }
 };
 // ================= KNIFE / KARAMBIT / INVENTORY =================
-const KAR_PRICE=1000,KP={
-  13:1000,14:1500,15:2000
+const KAR_PRICE=3500,KP={
+  13:3500,14:3000,15:4000
 };
 function ownK(id){
   return id===12||(id===13&&!!WS.kar)||!!(WS.kn&&WS.kn[id])
@@ -3834,6 +3841,7 @@ if(!WS.gift){
 updShopBtn();
 let invG=false;
 
+function asst(e,kn){[...(e.ad||[])].concat(e.pd?[myName]:[]).filter(n=>n!==kn).forEach(n=>{const r=sbr(n,myTeam);r.a=(r.a|0)+1})}
 function kadd(n,t){const r=sbr(n,t);r.k++;r.rk=(r.rk|0)+1}
 var SBR={},PCM={},PCOL=['#f5d90a','#a05cf0','#3ccf5a','#3a8bff','#ff8a1f'];
 function pcol(n){return PCM[n]||(PCM[n]=PCOL[Object.keys(PCM).length%5])}
@@ -3846,15 +3854,16 @@ function showSB(){
   bots.forEach(b=>rows.push({n:b.name||'Bot',t:1-myTeam,bot:!QM,k:sbr(b.name||'Bot',1-myTeam).k,d:SBR[b.name||'Bot'].d,p:pingOf(b.name||'Bot')}));
   Object.keys(SBR).forEach(n=>{if(!rows.some(r=>r.n===n))rows.push({n,t:SBR[n].t,k:SBR[n].k,d:SBR[n].d,p:pingOf(n),bot:!QM&&/^Bot /.test(n)})});
   if(online)Object.keys(rem).forEach(id=>{const n=nameOf(id);if(!rows.some(r=>r.n===n))rows.push({n,t:rem[id].team,k:sbr(n,rem[id].team).k,d:SBR[n].d,p:pingOf(n)})});
-  rows.forEach(r=>{r.mv=(SBR[r.n]&&SBR[r.n].mv)|0;r.m=r.me?P.money:Math.min(16000,800+r.k*300+(pingOf(r.n)%4)*400)});
+  rows.forEach(r=>{r.mv=(SBR[r.n]&&SBR[r.n].mv)|0;r.as=(SBR[r.n]&&SBR[r.n].a)|0;r.m=r.me?P.money:Math.min(16000,800+r.k*300+(pingOf(r.n)%4)*400)});
   let h='<div style="text-align:center;padding:8px;color:#9aa;letter-spacing:2px;font-size:12px">COMPETITIVE | '+(mapM?mapM.n.toUpperCase():'')+' · ROUND '+rnd+'</div>';
   const TM=[[0,'COUNTER-TERRORISTS','#6ea8ff',s0],[1,'TERRORISTS','#f5a623',s1]];
   if(myTeam===1)TM.reverse();
   TM.forEach(([t,nm,c,sc])=>{
-    nm+=t===myTeam?' · YOUR TEAM':'';
-    h+='<table><tr class="h1" style="color:'+c+'"><td>'+nm+'</td><td colspan="6">'+sc+'</td></tr><tr><th>PLAYER</th><th>MONEY</th><th>K</th><th>D</th><th>MVP</th><th>SCORE</th><th>PING</th></tr>';
-    rows.filter(r=>r.t===t).sort((a,b)=>(b.me?1:0)-(a.me?1:0)||b.k-a.k).forEach(r=>{h+='<tr'+(r.me?' class="me"':'')+'><td>'+(t===myTeam?'<span style="color:'+pcol(r.n)+'">●</span> ':'')+esc(r.n)+'</td><td style="color:#7dff7d">$'+r.m+'</td><td>'+r.k+'</td><td>'+r.d+'</td><td style="color:#ffd24a">'+(r.mv?'★'+r.mv:'')+'</td><td>'+(r.k*2+r.mv*3)+'</td><td>'+(r.bot?'BOT':r.p)+'</td></tr>'});
-    h+='</table>'});
+    const al=t===myTeam?(dead?0:1)+allies.length+Object.keys(rem).filter(q=>rem[q].team===t&&rem[q].g.visible).length:bots.length,tot=t===myTeam?Math.max(al,1+allies.length):Math.max(al,BOTN),
+    sbh=t===myTeam?'<span style="color:#fff">'+nm+'</span>':nm;
+    h+='<div class="tb" style="color:'+c+';border-bottom:1px solid #fff2"><div class="sc" style="color:'+c+'"><b>'+sc+'</b><small>'+nm+'</small><small>Alive '+al+'/'+(QM||online?5:tot)+'</small></div><table><tr><th>PLAYER</th><th>MONEY</th><th>K</th><th>A</th><th>D</th><th>MVP</th><th>SCORE</th><th>PING</th></tr>';
+    rows.filter(r=>r.t===t).sort((a,b)=>(b.me?1:0)-(a.me?1:0)||b.k-a.k).forEach(r=>{h+='<tr'+(r.me?' class="me"':'')+'><td>'+(t===myTeam?'<span style="color:'+pcol(r.n)+'">●</span> ':'')+esc(r.n)+'</td><td style="color:#7dff7d">$'+r.m+'</td><td>'+r.k+'</td><td>'+(r.as|0)+'</td><td>'+r.d+'</td><td style="color:#4aa8ff">'+(r.mv?'★'+(r.mv>1?r.mv:''):'')+'</td><td>'+(r.k*2+(r.as|0)+r.mv*3)+'</td><td>'+(r.bot?'BOT':r.p)+'</td></tr>'});
+    h+='</table></div>'});
   sb.innerHTML=h;sb.style.display='block'
 }
 let sbT=0;
@@ -4001,5 +4010,60 @@ addEventListener('visibilitychange',()=>{
     cloudPush()
   }
 });
+
+// ================= LOGIN (local accounts) =================
+var CUR=localStorage.getItem('cscur')||'';
+function accSave(){try{if(!CUR)return;localStorage.setItem('csacc_d_'+CUR,JSON.stringify({ws:WS,st:ST,fr:FR}))}catch(e){}}
+async function hp(p){try{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('csb|'+p));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}catch(e){let h=5381;for(const c of 'csb|'+p)h=(h*33+c.charCodeAt(0))>>>0;return'x'+h}}
+function accs(){try{return JSON.parse(localStorage.getItem('csacc')||'{}')}catch(e){return{}}}
+const lg=document.createElement('div');
+lg.id='lg';
+lg.style.cssText='position:fixed;inset:0;z-index:30;display:none;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 20%,#2b3340,#0e1116 70%)';
+lg.innerHTML='<div class="box"><h1>CS<span>LOGIN</span></h1><label class="s">Username (3-12 letters / digits)<input id="lu" maxlength="12"></label><label class="s">Password<input id="lp" type="password" maxlength="40"></label><button id="lb">LOGIN</button><button id="lr" style="background:#4a8a4a;color:#fff">CREATE ACCOUNT</button><button id="lgst" style="background:#444;color:#fff">PLAY AS GUEST</button><p class="s" id="lm"></p><p class="s">Coins, skins and knives are saved under your account on this device (browser). They stay as long as you do not clear the browser data. There is no server, so the account does not follow you to another device.</p></div>';
+document.body.appendChild(lg);
+const chip=document.createElement('div');
+chip.className='s';chip.style.cssText='cursor:pointer;margin:0 0 8px';
+document.querySelector('#menu .box').prepend(chip);
+function upAcct(){chip.innerHTML=CUR?'👤 <b>'+esc(CUR)+'</b> · saved · <u>LOG OUT</u>':'👤 Guest · <u>LOG IN</u>'}
+chip.onclick=()=>{if(CUR){accSave();localStorage.removeItem('cscur');location.reload()}else lg.style.display='flex'};
+function enter(n,fresh){
+  CUR=n;localStorage.setItem('cscur',n);
+  if(fresh)accSave();
+  else try{const c=JSON.parse(localStorage.getItem('csacc_d_'+n));if(c&&c.ws)loadFromCloud(c)}catch(e){}
+  $('nm').value=n;myName=n;lg.style.display='none';upAcct()
+}
+const lmsg=t=>$('lm').textContent=t;
+$('lb').onclick=async()=>{
+  const n=$('lu').value.trim(),a=accs();
+  if(!a[n]||a[n]!==await hp($('lp').value))return lmsg('Wrong username or password.');
+  enter(n,false)
+};
+$('lr').onclick=async()=>{
+  const n=$('lu').value.trim(),a=accs();
+  if(!/^[A-Za-z0-9_]{3,12}$/.test(n))return lmsg('Username: 3-12 letters, digits or _.');
+  if($('lp').value.length<4)return lmsg('Password: at least 4 characters.');
+  if(a[n])return lmsg('This username already exists.');
+  a[n]=await hp($('lp').value);
+  localStorage.setItem('csacc',JSON.stringify(a));
+  enter(n,true)
+};
+$('lgst').onclick=()=>{lg.style.display='none'};
+addEventListener('beforeunload',accSave);
+if(CUR&&accs()[CUR])enter(CUR,false);
+else{CUR='';upAcct();lg.style.display='flex'}
+
+// ================= ALL WEAPONS & MAPS =================
+{
+  const ar=document.createElement('div');ar.id='ar';
+  const cats=[['PISTOLS',[0,16,1,17,23,24,2,3,4,25]],['SMG',[5,18,6]],['RIFLES',[7,19,8,20,9,21,22]],['SHOTGUNS & MACHINE GUNS',[26,27,28,29,30,31]],['SNIPERS',[10,11,32,33]]];
+  const tc=i=>TL[0].includes(i)?'#6ea8ff':TL[1].includes(i)?'#f5a623':'#8a9';
+  let h='<div class="box" style="width:min(900px,96vw)"><h1 style="font-size:26px">ALL WEAPONS</h1><p class="s"><span style="color:#6ea8ff">blue = CT only</span> · <span style="color:#f5a623">orange = T only</span> · grey = both</p>';
+  cats.forEach(([n,l])=>{h+='<h3>'+n+'</h3><div class="row">'+l.map(i=>'<div class="wc" style="border-color:'+tc(i)+'">'+WP[i].n+'<small>$'+WP[i].p+' · '+WP[i].d+' dmg · '+WP[i].mag+' rounds</small></div>').join('')+'</div>'});
+  h+='<h3>MAPS</h3><div class="row">'+MAPS.map(m=>'<div class="wc" style="border-color:#4a8aff">'+m.n+'<small>'+m.d+'</small></div>').join('')+'</div><button id="arx">CLOSE</button></div>';
+  ar.innerHTML=h;document.body.appendChild(ar);
+  $('arx').onclick=()=>ar.style.display='none';
+  const b=document.createElement('button');b.textContent='📖 ALL WEAPONS & MAPS';b.style.cssText='background:#1a3a7a;color:#fff';b.onclick=()=>ar.style.display='flex';
+  $('go').after(b)
+}
 cloudInit();
 </script></body></html>
