@@ -48,6 +48,7 @@ body.t #hn{bottom:90px}body.t #msg{font-size:24px}body.t #feed{font-size:12px;to
 body.t #rad{width:110px;height:110px}
 </style></head><body>
 <div id="menu"><div class="box"><h1>CS<span>BROWSER ONLINE</span></h1>
+<p class="s" id="cl" style="margin:6px 0 0"></p>
 <label class="s">Nume jucător<input id="nm" maxlength="12" value="Player"></label>
 <h3>Mod de joc</h3><div id="modes" class="row"></div>
 <div id="oc" style="display:none"><label class="s">Cod cameră (același la toți jucătorii)<input id="cd" maxlength="10" value="meci1"></label></div>
@@ -89,9 +90,9 @@ body.t #rad{width:110px;height:110px}
 (function(){const show=m=>{let e=document.getElementById('errb');if(!e){e=document.createElement('div');e.id='errb';e.style.cssText='position:fixed;left:8px;right:8px;top:8px;z-index:99;background:#b00020;color:#fff;padding:8px 12px;border-radius:8px;font:13px/1.4 sans-serif;cursor:pointer';e.onclick=()=>e.remove();document.body.appendChild(e)}e.textContent='Eroare: '+m+' (atinge ca să închizi)'};addEventListener('error',ev=>show(ev.message||'necunoscută'));addEventListener('unhandledrejection',ev=>show((ev.reason&&ev.reason.message)||String(ev.reason)))})();
 const T=THREE,$=i=>document.getElementById(i);
 let ST={sens:1,scs:1,fov:75,vol:1,vg:1,vs:.6,chs:7,cht:2,chg:4,chd:0,cho:1,chc:'#33ff33',dmg:1,shd:1};try{Object.assign(ST,JSON.parse(localStorage.getItem('csst')||'{}'))}catch(e){}
-const SAVE=()=>{try{localStorage.setItem('csst',JSON.stringify(ST))}catch(e){}};
+const SAVE=()=>{try{localStorage.setItem('csst',JSON.stringify(ST))}catch(e){}cloudSoon()};
 let WS={coins:300,inv:[],eq:{}};try{const x=JSON.parse(localStorage.getItem('csw')||'null');if(x)WS=x}catch(e){}
-const saveW=()=>{try{localStorage.setItem('csw',JSON.stringify(WS))}catch(e){}};
+const saveW=()=>{WS.ts=Date.now();try{localStorage.setItem('csw',JSON.stringify(WS))}catch(e){}cloudSoon()};
 const SK=[['Original',null,0],['Gheață',0x3a8bd5,0],['Sânge',0xb01818,0],['Toxic',0x3ac43a,0],['Violet Neon',0x8a3aff,1],['Aur',0xe8b923,2],['Carbon',0x2a2a33,0],['Roz Bubble',0xff6fb5,1],['Foc',0xff7a18,1],['Crom',0xd0d8e0,2],['Albastru Regal',0x1f3fbf,0],['Camuflaj',0x5a6b3a,0],['Smarald',0x00c070,1],['Perlă',0xf2f2f2,1],['Ocean Fade',0x00d4ff,2],['Magma',0xff3b00,2],['Galaxie',0x6a3dff,2]];
 const SETS=[['Mouse & vizualizare'],['sens','Sensibilitate',.2,3,.05],['scs','Sensibilitate scop',.3,2,.05],['fov','Câmp vizual (FOV)',60,110,1],['Sunet'],['vol','Volum general',0,1,.05],['vg','Volum arme',0,1.5,.05],['vs','Volum pași/efecte',0,1.5,.05],['Țintă (crosshair)'],['chs','Lungime',0,20,1],['cht','Grosime',1,6,1],['chg','Spațiu',0,15,1],['chd','Punct central (0/1)',0,1,1],['cho','Opacitate',.2,1,.05],['chc','Culoare','color'],['Altele'],['dmg','Afișează damage (0/1)',0,1,1],['shd','Umbre (0/1)',0,1,1]];
 const MAPS=[
@@ -442,7 +443,7 @@ function begin(){launch().catch(e=>{$('menu').style.display='flex';throw e});if(
 // ================= LOBBY =================
 let RM=null,lob=null,lobT=null;
 let FR=[];try{FR=JSON.parse(localStorage.getItem('csfr')||'[]')}catch(e){}
-const saveFr=()=>{try{localStorage.setItem('csfr',JSON.stringify(FR))}catch(e){}};
+const saveFr=()=>{WS.ts=Date.now();try{localStorage.setItem('csfr',JSON.stringify(FR));localStorage.setItem('csw',JSON.stringify(WS))}catch(e){}cloudSoon()};
 const cleanCode=v=>(v||'meci1').toLowerCase().replace(/[^a-z0-9]/g,'');
 const lobPres=s=>{if(lob){try{lob.presence({n:myName,s,m:ms,mp:mm,cd:cleanCode($('cd').value),tm:pref})}catch(e){}}};
 const lobPeers=()=>{try{return lob?lob.peers().filter(p=>p.kind==='viewer'&&p.presence&&p.presence.n):[]}catch(e){return[]}};
@@ -522,11 +523,42 @@ function renderShop(){$('shc').textContent=WS.coins+' monede';
  updShopBtn()}
 document.querySelectorAll('.bsh').forEach(b=>b.onclick=()=>{$('shm').textContent='';renderShop();$('sh').style.display='flex'});
 $('shx').onclick=()=>{$('sh').style.display='none';updShopBtn()};$('sht0').onclick=()=>{shK=12;renderShop()};$('sht1').onclick=()=>{shK=13;renderShop()};
-if(!WS.gift){WS.gift=1;WS.fc=(WS.fc||0)+1;saveW()}updShopBtn();
+if(!WS.gift){WS.gift=1;WS.fc=(WS.fc||0)+1}updShopBtn();
 let invG=false;
 function toggleInvG(){if(!running)return;if(invG){closeInvG();return}if(buyOpen)return;invG=true;fire=false;zoom=false;renderInv();$('inv').style.display='flex';try{document.exitPointerLock()}catch(e){}if(TCH)locked=false}
 function closeInvG(){if(!invG)return;invG=false;$('inv').style.display='none';if(TCH){locked=true;$('ov').style.display='none'}else{try{R.domElement.requestPointerLock()}catch(e){}}}
 $('ix').addEventListener('click',()=>{if(invG)closeInvG()});
 addEventListener('keydown',e=>{if(!running||e.target.tagName==='INPUT')return;if(e.code==='Digit3')selW(P.kn);if(e.code==='KeyI'||e.code==='Tab'){e.preventDefault();toggleInvG()}});
 
+
+// ================= CLOUD SAVE (cont claude.ai) =================
+var CL={ref:null,id:null,name:'',ready:false,t:0,st:'wait'};
+function setCl(s){CL.st=s;const e=$('cl');if(!e)return;
+ const T2={wait:'☁ Se conectează la contul tău…',
+  ok:'☁ Conectat'+(CL.name?' ca '+CL.name:'')+' · progresul (monede, skinuri, cuțite, prieteni) se salvează în cont și te urmărește pe orice dispozitiv.',
+  local:'Neconectat · progresul se salvează doar pe acest dispozitiv. Deschide jocul din linkul artifact, cu contul claude.ai, ca să fie salvat în cont.',
+  ro:'☁ Contul tău nu poate salva datele (ai nevoie de rol Contributor pe acest artifact). Progresul rămâne doar pe acest dispozitiv.',
+  err:'☁ Eroare la conectarea contului. Progresul rămâne salvat pe acest dispozitiv.'};
+ e.textContent=T2[s]||'';e.style.color=s==='ok'?'#8f8':s==='wait'?'#9aa':'#fc8'}
+function cloudSoon(){if(!CL||!CL.ref||!CL.ready)return;clearTimeout(CL.t);CL.t=setTimeout(()=>cloudPush(),1500)}
+async function cloudPush(){if(!CL||!CL.ref)return;try{if(!WS.ts)WS.ts=Date.now();await CL.ref.set({ws:WS,st:ST,fr:FR,ts:WS.ts,n:myName});setCl('ok')}catch(e){setCl('ro')}}
+function loadFromCloud(c){for(const k in WS)delete WS[k];Object.assign(WS,c.ws);WS.eq=WS.eq||{};WS.inv=WS.inv||[];if(typeof WS.coins!=='number')WS.coins=300;
+ if(c.st)Object.assign(ST,c.st);if(Array.isArray(c.fr)){FR.length=0;c.fr.forEach(x=>FR.push(x))}
+ try{localStorage.setItem('csw',JSON.stringify(WS));localStorage.setItem('csst',JSON.stringify(ST));localStorage.setItem('csfr',JSON.stringify(FR))}catch(e){}
+ applySkins();P.kn=knifeId();updShopBtn();if($('inv').style.display==='flex')renderInv();if($('sh').style.display==='flex')renderShop()}
+async function cloudInit(){
+ if(!window.claude||!window.claude.use){setCl('local');return}
+ setCl('wait');
+ try{const[u,d]=await Promise.all([claude.use('user'),claude.use('db')]);
+  if(!u||!d){setCl('local');return}
+  const me=await u.me();if(!me||!me.id){setCl('local');return}
+  CL.id=me.id;CL.name=me.name||'';CL.ref=d.doc('data/users/'+me.id+'/save');
+  if(CL.name&&$('nm').value==='Player')$('nm').value=CL.name.slice(0,12);
+  const s=await CL.ref.get();
+  if(s.exists){const c=s.data();if(c&&c.ws&&(!WS.ts||(c.ts||0)>WS.ts)){loadFromCloud(c);setCl('ok')}else await cloudPush()}
+  else await cloudPush();
+  CL.ready=true;if(CL.st==='wait')setCl('ok')}
+ catch(e){setCl('err')}}
+addEventListener('visibilitychange',()=>{if(document.hidden&&CL&&CL.ready){clearTimeout(CL.t);cloudPush()}});
+cloudInit();
 </script></body></html>
