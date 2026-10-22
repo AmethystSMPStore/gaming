@@ -458,7 +458,7 @@ function loop(now){requestAnimationFrame(loop);_fn++;if(_ft===null)_ft=now;else 
 // ---- start ----
 async function launch(){ac();myName=($('nm').value||'Player').slice(0,12);$('nm2').value=myName;mapM=MAPS[mm];buildMap(mapM);need=MODES[ms][3];online=need>1;code=($('cd').value||'match1').toLowerCase().replace(/[^a-z0-9]/g,'');
  $('menu').style.display='none';running=true;R.domElement.requestPointerLock();
- if(online){try{const r=window.claude&&await claude.use('room');if(r){room=await r.join('cs-'+code+'-'+MODES[ms][0]+'-'+mm);room.on('hit',m=>{if(m.data&&m.data.to===myId&&!m.sameTab)hurt(Math.min(999,+m.data.d||0),m.peer)});
+ if(online){try{const r=await roomApi();if(r){room=await r.join('cs-'+code+'-'+MODES[ms][0]+'-'+mm);room.on('hit',m=>{if(m.data&&m.data.to===myId&&!m.sameTab)hurt(Math.min(999,+m.data.d||0),m.peer)});
    room.on('shot',m=>{const d=m.data;if(!m.isMe&&d)shotSnd(d.w|0,tv.set(d.x,0,d.z),.9)});room.on('kill',m=>{if(m.data&&m.data.x!==undefined)dropW(m.data.w|0,{x:m.data.x,y:m.data.y,z:m.data.z});if(m.data&&m.data.k===myId)P.money=Math.min(16000,P.money+300);WS.coins+=15;saveW();if(!m.isMe&&m.data)feed(nameOf(m.data.k),nameOf(m.peer))});await room.presence({n:myName,tm:pref,a:0,r:0})}}catch(e){room=null}}
  else newRound()}
 requestAnimationFrame(loop);
@@ -499,6 +499,28 @@ $('dpc').onclick=()=>setDev(false);$('dph').onclick=()=>setDev(true);
 function begin(){launch().catch(e=>{$('menu').style.display='flex';throw e});if(TCH){locked=true;tcE.style.display='block'}}
 
 // ================= LOBBY =================
+// ---- online transport: Claude artifact room if present, otherwise serverless P2P (WebRTC via Trystero) so it also works on GitHub Pages ----
+let _netP=null;
+async function roomApi(){try{const r=window.claude&&await claude.use('room');if(r)return r}catch(e){}return netRoom()}
+function netRoom(){return _netP||(_netP=(async()=>{
+ let X=null;for(const u of ['https://esm.run/trystero@0.21.5/torrent','https://esm.sh/trystero@0.21.5/torrent','https://esm.run/trystero@0.21.5']){try{X=await import(u);if(X&&X.joinRoom)break;X=null}catch(e){X=null}}
+ if(!X)return null;
+ const self=X.selfId||('p'+Math.random().toString(36).slice(2,10));
+ const mkMsg=(t,d,id)=>({topic:t,data:d,peer:id,by:null,isMe:id===self,sameTab:id===self,kind:'viewer',guest:false});
+ return{connected:()=>true,join:async name=>{
+  const rm=X.joinRoom({appId:'cs-browser-online-v1'},String(name)),[sendEv,getEv]=rm.makeAction('ev'),[sendPr,getPr]=rm.makeAction('pr'),subs={},others=new Map();let mine={};
+  const fire=m=>{(subs[m.topic]||[]).slice().forEach(f=>{try{f(m)}catch(e){}})};
+  getEv((m,id)=>{if(m&&typeof m.t==='string')fire(mkMsg(m.t,m.d,id))});
+  getPr((d,id)=>{others.set(id,{presence:(d&&typeof d==='object')?d:{},updatedAt:Date.now()})});
+  rm.onPeerJoin(id=>{if(!others.has(id))others.set(id,{presence:{},updatedAt:Date.now()});try{sendPr(mine,id)}catch(e){}});
+  rm.onPeerLeave(id=>{others.delete(id)});
+  return{
+   emit:async(t,d)=>{try{sendEv({t,d})}catch(e){}queueMicrotask(()=>fire(mkMsg(t,d,self)))},
+   on:(t,f)=>{(subs[t]=subs[t]||[]).push(f);return()=>{subs[t]=(subs[t]||[]).filter(x=>x!==f)}},
+   presence:async p=>{for(const k in p){if(p[k]===null)delete mine[k];else mine[k]=p[k]}try{sendPr(mine)}catch(e){}},
+   peers:()=>[{peer:self,by:null,isMe:true,sameTab:true,kind:'viewer',guest:false,presence:mine,updatedAt:Date.now()},...[...others].map(([id,v])=>({peer:id,by:null,isMe:false,sameTab:false,kind:'viewer',guest:false,presence:v.presence,updatedAt:v.updatedAt}))],
+   leave:()=>{try{rm.leave()}catch(e){}}}}}
+})())}
 let RM=null,lob=null,lobT=null;
 let FR=[];try{FR=JSON.parse(localStorage.getItem('csfr')||'[]')}catch(e){}
 const saveFr=()=>{WS.ts=Date.now();try{localStorage.setItem('csfr',JSON.stringify(FR));localStorage.setItem('csw',JSON.stringify(WS))}catch(e){}cloudSoon()};
@@ -530,8 +552,8 @@ function renderLobby(){
 async function openLobby(){
  myName=($('nm').value||'Player').slice(0,12);
  $('lb').style.display='flex';$('lbt').textContent='LOBBY · '+MODES[ms][1]+' · '+MAPS[mm].n;$('lbs').textContent='Connecting…';
- try{if(!RM)RM=window.claude&&await claude.use('room');if(RM&&!lob)lob=await RM.join('cs-lobby-v1')}catch(e){lob=null}
- if(!lob){$('lbs').textContent='Online unavailable here. Open the published artifact link while signed in (invited friends need Contributor access or higher). You can still play against bots.';$('lbc').textContent='PLAY VS BOTS';return}
+ try{if(!RM)RM=await roomApi();if(RM&&!lob)lob=await RM.join('cs-lobby-v1')}catch(e){lob=null}
+ if(!lob){$('lbs').textContent='Online unavailable: could not reach the peer-to-peer network (check your connection or try another browser). You can still play against bots.';$('lbc').textContent='PLAY VS BOTS';return}
  $('lbs').textContent='';$('lbc').textContent='CREATE MATCH';lobPres('l');clearInterval(lobT);lobT=setInterval(renderLobby,800);renderLobby();
 }
 function closeLobby(){clearInterval(lobT);$('lb').style.display='none'}
