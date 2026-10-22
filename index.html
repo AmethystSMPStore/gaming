@@ -44,7 +44,7 @@ button{padding:14px 20px;background:var(--t);color:#111;border:0;border-radius:8
 .tb.sm{border-radius:10px}.tb.on,.tb:active{background:#f5a623aa}
 body.t #wl,body.t #dr{display:none}body.t #hp{left:176px;top:8px;bottom:auto;font-size:28px}body.t #hp div{width:120px!important}
 body.t #mo{left:176px;top:62px;bottom:auto;font-size:18px}body.t #am{right:auto;left:50%;transform:translateX(-50%);bottom:6px;font-size:28px;text-align:center}
-body.t #hn{bottom:90px}body.t #msg{font-size:24px}body.t #feed{font-size:12px;top:56px}
+body.t #hn{bottom:90px}body.t #msg{font-size:24px}body.t #feed{font-size:12px;top:100px}
 body.t #rad{width:110px;height:110px}
 </style></head><body>
 <div id="menu"><div class="box"><h1>CS<span>BROWSER ONLINE</span></h1>
@@ -54,7 +54,7 @@ body.t #rad{width:110px;height:110px}
 <h3>Echipă</h3><div id="teams" class="row"></div><h3>Hartă</h3><div id="maps" class="row"></div>
 <button id="go">START MECI</button><div class="row"><button class="bst" style="background:#444;color:#fff">SETĂRI</button><button class="binv" style="background:#444;color:#fff">CUTII &amp; SKINURI</button></div>
 <p class="s">WASD · mouse · click stânga foc · click dreapta scop · B cumpără · 1/2/Q arme · R reîncărcare · G smoke · Space sărit · Shift mers încet · Ctrl ghemuit. Online (1v1 / 2v2): apeși START și intri în LOBBY — vezi cine e online, intri într-un meci deschis sau creezi unul. Poți adăuga prieteni cu ★.</p></div></div>
-<div id="buy"><div class="box"><h1 style="font-size:28px">CUMPĂRARE <span id="bm"></span></h1><div id="bl"></div><button id="bc">ÎNCHIDE (B)</button></div></div><div id="st" class="pn"><div class="box"><h1 style="font-size:28px">SETĂRI</h1><div id="sl"></div><button id="sx">ÎNAPOI</button></div></div><div id="inv" class="pn"><div class="box"><h1 style="font-size:28px">CUTII &amp; SKINURI <span id="co"></span></h1><button id="oc2">DESCHIDE CUTIE · 300 monede</button><div id="cr" class="s" style="font-size:15px;min-height:28px"></div><h3>Inventar (click = echipează)</h3><div id="il" class="row"></div><button id="ix">ÎNAPOI</button></div></div><div id="ov"><div class="box"><h1>PAUZĂ</h1><label class="s">Nume jucător<input id="nm2" maxlength="12"></label><h3>Controale</h3><div class="s" id="ctl" style="font-size:14px;color:#dde"></div><button id="rs">CONTINUĂ</button><button id="bb" style="background:#2a7a3a;color:#fff">CUMPĂRĂ ARME (B)</button><div class="row"><button class="bst" style="background:#444;color:#fff">SETĂRI</button><button class="binv" style="background:#444;color:#fff">CUTII &amp; SKINURI</button></div><button id="mn" style="background:#444;color:#fff">Meniu principal</button></div></div>
+<div id="buy"><div class="box"><h1 style="font-size:28px">CUMPĂRARE <span id="bm"></span></h1><div id="bl"></div><button id="bc">ÎNCHIDE (B)</button></div></div><div id="st" class="pn"><div class="box"><h1 style="font-size:28px">SETĂRI</h1><div id="sl"></div><button id="sx">ÎNAPOI</button></div></div><div id="inv" class="pn"><div class="box"><h1 style="font-size:28px">CUTII &amp; SKINURI <span id="co"></span></h1><button id="oc2">DESCHIDE CUTIE · 300 monede</button><div id="cr" class="s" style="font-size:15px;min-height:28px"></div><h3>Cuțite</h3><div id="ks" class="row"></div><div class="s" id="ksm"></div><h3>Inventar (click = echipează)</h3><div id="il" class="row"></div><button id="ix">ÎNAPOI</button></div></div><div id="ov"><div class="box"><h1>PAUZĂ</h1><label class="s">Nume jucător<input id="nm2" maxlength="12"></label><h3>Controale</h3><div class="s" id="ctl" style="font-size:14px;color:#dde"></div><button id="rs">CONTINUĂ</button><button id="bb" style="background:#2a7a3a;color:#fff">CUMPĂRĂ ARME (B)</button><div class="row"><button class="bst" style="background:#444;color:#fff">SETĂRI</button><button class="binv" style="background:#444;color:#fff">CUTII &amp; SKINURI</button></div><button id="mn" style="background:#444;color:#fff">Meniu principal</button></div></div>
 <div id="vg"></div>
 <div id="dev"><div class="box"><h1>CS<span>BROWSER ONLINE</span></h1><h3>Pe ce joci?</h3><div class="row"><div class="o" id="dpc">💻 PC<small>tastatură + mouse</small></div><div class="o" id="dph">📱 Telefon<small>controale pe ecran (ține telefonul orizontal)</small></div></div></div></div>
 <div id="lb" class="pn"><div class="box"><h1 id="lbt" style="font-size:26px"></h1><div class="s" id="lbs"></div>
@@ -72,6 +72,8 @@ body.t #rad{width:110px;height:110px}
 <div class="tb sm" data-a="buy" style="top:8px;left:calc(50% + 90px);width:42px;height:38px">B</div>
 <div class="tb sm" data-a="pick" style="top:8px;left:calc(50% + 138px);width:42px;height:38px">E</div>
 <div class="tb sm" data-a="swap" style="top:8px;left:calc(50% + 186px);width:42px;height:38px">⇄</div>
+<div class="tb sm" data-a="knife" style="top:52px;left:calc(50% + 90px);width:42px;height:38px">🔪</div>
+<div class="tb sm" data-a="inv" style="top:52px;left:calc(50% + 138px);width:42px;height:38px">🎒</div>
 <div class="tb sm" data-a="pause" style="top:8px;left:calc(50% + 234px);width:42px;height:38px">☰</div></div>
 <canvas id="rad" class="h" width="150" height="150"></canvas>
 <div id="top" class="h"><span id="ct">0</span><b id="tm">1:55</b><span id="tt">0</span></div>
@@ -84,7 +86,7 @@ let ST={sens:1,scs:1,fov:75,vol:1,vg:1,vs:.6,chs:7,cht:2,chg:4,chd:0,cho:1,chc:'
 const SAVE=()=>{try{localStorage.setItem('csst',JSON.stringify(ST))}catch(e){}};
 let WS={coins:300,inv:[],eq:{}};try{const x=JSON.parse(localStorage.getItem('csw')||'null');if(x)WS=x}catch(e){}
 const saveW=()=>{try{localStorage.setItem('csw',JSON.stringify(WS))}catch(e){}};
-const SK=[['Original',null,0],['Gheață',0x3a8bd5,0],['Sânge',0xb01818,0],['Toxic',0x3ac43a,0],['Violet Neon',0x8a3aff,1],['Aur',0xe8b923,2],['Carbon',0x2a2a33,0],['Roz Bubble',0xff6fb5,1],['Foc',0xff7a18,1],['Crom',0xd0d8e0,2],['Albastru Regal',0x1f3fbf,0],['Camuflaj',0x5a6b3a,0]];
+const SK=[['Original',null,0],['Gheață',0x3a8bd5,0],['Sânge',0xb01818,0],['Toxic',0x3ac43a,0],['Violet Neon',0x8a3aff,1],['Aur',0xe8b923,2],['Carbon',0x2a2a33,0],['Roz Bubble',0xff6fb5,1],['Foc',0xff7a18,1],['Crom',0xd0d8e0,2],['Albastru Regal',0x1f3fbf,0],['Camuflaj',0x5a6b3a,0],['Smarald',0x00c070,1],['Perlă',0xf2f2f2,1],['Ocean Fade',0x00d4ff,2],['Magma',0xff3b00,2],['Galaxie',0x6a3dff,2]];
 const SETS=[['Mouse & vizualizare'],['sens','Sensibilitate',.2,3,.05],['scs','Sensibilitate scop',.3,2,.05],['fov','Câmp vizual (FOV)',60,110,1],['Sunet'],['vol','Volum general',0,1,.05],['vg','Volum arme',0,1.5,.05],['vs','Volum pași/efecte',0,1.5,.05],['Țintă (crosshair)'],['chs','Lungime',0,20,1],['cht','Grosime',1,6,1],['chg','Spațiu',0,15,1],['chd','Punct central (0/1)',0,1,1],['cho','Opacitate',.2,1,.05],['chc','Culoare','color'],['Altele'],['dmg','Afișează damage (0/1)',0,1,1],['shd','Umbre (0/1)',0,1,1]];
 const MAPS=[
 {n:'Dunes',d:'Orașul de gresie',s:0x9cc4e8,f:0xd9d6c8,g:0xe8d2a8,w:0xf0d8b0,h:0xc9a36a,palm:1,W:[[-12,-12,10,8,8],[14,-14,8,10,10,0xe6c797],[0,-24,8,4,12],[-24,6,6,14,7],[24,6,8,8,7,0xe6c797],[0,0,5,5,2.6],[8,10,2,2,1.2],[-8,14,2,2,1.2],[0,18,12,1,1.6],[-14,-26,6,1,1.4],[16,26,6,1,1.4],[0,-8,1.5,8,2.4]]},
@@ -103,7 +105,9 @@ const WP=[
 {n:'AK-47',p:2700,s:0,m:1,d:36,r:.1,mag:30,res:90,sp:.0025,rec:.011,au:1,mz:-.9,f:6000,th:150,z:55},
 {n:'M4A1-S',p:2900,s:0,m:0,d:33,r:.09,mag:25,res:75,sp:.002,rec:.008,au:1,mz:-.84,f:7000,th:130,z:55},
 {n:'SSG 08',p:1700,s:0,m:3,d:88,r:1.25,mag:10,res:30,sp:.0005,rec:.025,au:0,mz:-1.1,f:8000,th:100,z:30,sn:1,sc:.9},
-{n:'AWP',p:4750,s:0,m:3,d:115,r:1.3,mag:5,res:20,sp:.0004,rec:.03,au:0,mz:-1.2,f:9000,th:90,z:25,sn:1}];
+{n:'AWP',p:4750,s:0,m:3,d:115,r:1.3,mag:5,res:20,sp:.0004,rec:.03,au:0,mz:-1.2,f:9000,th:90,z:25,sn:1},
+{n:'Cuțit',p:0,s:2,m:5,d:40,r:.5,mag:1,res:0,sp:0,rec:0,au:0,mz:-.3,f:0,th:0,z:75,kn:1,hm:1},
+{n:'Karambit',p:0,s:2,m:5,d:40,r:.5,mag:1,res:0,sp:0,rec:0,au:0,mz:-.3,f:0,th:0,z:75,kn:1,hm:1}];
 let ms=0,mm=0,pref=0;
 MODES.forEach((m,i)=>{const e=document.createElement('div');e.className='o'+(i?'':' on');e.innerHTML=m[1]+'<small>'+m[2]+'</small>';e.onclick=()=>{ms=i;[...$('modes').children].forEach((c,j)=>c.classList.toggle('on',j===i));$('oc').style.display=i?'block':'none'};$('modes').appendChild(e)});
 MAPS.forEach((m,i)=>{const e=document.createElement('div');e.className='o'+(i?'':' on');e.style.background=`linear-gradient(#${m.s.toString(16).padStart(6,0)}88,#${m.g.toString(16).padStart(6,0)}88)`;e.innerHTML=m.n+'<small>'+m.d+'</small>';e.onclick=()=>{mm=i;[...$('maps').children].forEach((c,j)=>c.classList.toggle('on',j===i))};$('maps').appendChild(e)});
@@ -180,8 +184,19 @@ function gunX(g,t){const rail=(a,b,y)=>{for(let z=a;z>b;z-=.03)B(g,.036,.008,.01
  if(t===1){B(g,.03,.09,.06,0,-.17,-.275,'bl',.7);Cy(g,.02,.04,0,.03,-.9,'mt');Cy(g,.018,.045,0,.03,-.96,'mt');B(g,.03,.02,.04,0,.065,-.38,'mt');B(g,.04,.01,.2,0,.043,-.25,'mt');B(g,.03,.015,.025,.03,.02,-.25,'ft');B(g,.03,.01,.07,0,-.06,-.12,'mt')}
  if(t===3){B(g,.02,.05,.025,0,.065,-.2,'mt');B(g,.02,.05,.025,0,.065,-.5,'mt');B(g,.02,.03,.02,0,.135,-.35,'mt');B(g,.03,.02,.02,.04,.095,-.35,'mt');B(g,.07,.012,.012,.05,.02,-.12,'ft');B(g,.02,.02,.02,.09,.02,-.12,'ft');Cy(g,.024,.1,0,.02,-1.22,'mt');B(g,.045,.03,.14,0,.06,.02,'mt');B(g,.035,.06,.08,0,-.07,-.3,'bl')}
  if(t===4){rail(-.15,-.35,.0775);B(g,.03,.12,.05,0,-.14,-.25,'bl');B(g,.052,.02,.06,0,.02,-.2,'bl');B(g,.03,.01,.07,0,-.06,-.12,'mt')}}
-function gun(i){const w=WP[i],g=w.m===2?pist(i):gun0(w.m);if(w.m!==2){gunX(g,w.m);gunY(g,w.m)}g.scale.setScalar(w.sc||1);if(w.m!==2){B(g,.02,.02,.08,0,-.045,-.19,'bl');B(g,.032,.032,.04,0,.015,w.mz+.04,'bl');B(g,.055,.012,.12,0,.05,-.32,'gd')}else B(g,.03,.012,.07,0,-.04,-.15,'bl');g.traverse(o=>{if(o.isMesh&&[MT.dk,MT.gn,MT.wd,MT.gd].includes(o.material)){o.userData.sk=1;o.material=o.material.clone();o.userData.orig=o.material.color.getHex()}});return g}
-function applySkins(){G.forEach((g,i)=>{const k=WS.eq[i]||0;g.traverse(o=>{if(o.userData.sk){o.material.color.setHex(k?SK[k][1]:o.userData.orig);o.material.emissive.setHex(k&&SK[k][2]===2?0x332200:0)}})})}
+function knifeM(i){const g=new T.Group(),kar=i===13,bx=(w,h,d)=>new T.BoxGeometry(w,h,d);
+ const bm=new T.MeshPhongMaterial({color:kar?0xe8ecf2:0xdfe6ee,shininess:200,specular:0xffffff}),hm=new T.MeshPhongMaterial({color:kar?0x1c1c22:0x2a2218,shininess:40}),am=new T.MeshPhongMaterial({color:0xd4af37,shininess:160,specular:0xffffff}),bl=[];
+ const add=(geo,m,x,y,z)=>{const o=new T.Mesh(geo,m);o.position.set(x,y,z);g.add(o);return o};
+ if(!kar){add(bx(.03,.036,.15),hm,0,-.03,-.1);add(bx(.05,.075,.014),am,0,-.012,-.18);bl.push(add(bx(.011,.052,.27),bm,0,-.012,-.33));
+  const t=add(new T.ConeGeometry(.03,.09,4),bm,0,-.012,-.51);t.rotation.x=-Math.PI/2;t.scale.set(.18,1,.87);bl.push(t)}
+ else{add(bx(.032,.04,.11),hm,0,-.03,-.09);const rg=add(new T.TorusGeometry(.03,.007,8,20),am,0,-.03,-.015);rg.rotation.y=Math.PI/2;
+  add(bx(.034,.012,.03),am,0,-.03,-.15);const R=.17,N=9;
+  for(let j=0;j<N;j++){const t=(j+.5)/N,a=t*1.25,o=add(bx(.01,.05*(1-t*.6)+.008,R*1.25/N*1.18),bm,0,-.03-R*(1-Math.cos(a)),-.16-R*Math.sin(a));o.rotation.x=-a;bl.push(o)}}
+ bl.forEach(o=>{o.userData.sk=1;o.userData.orig=bm.color.getHex()});
+ g.rotation.set(.1,.5,-.15);g.scale.setScalar(1.15);return g}
+function gun(i){if(WP[i].kn)return knifeM(i);const w=WP[i],g=w.m===2?pist(i):gun0(w.m);if(w.m!==2){gunX(g,w.m);gunY(g,w.m)}g.scale.setScalar(w.sc||1);if(w.m!==2){B(g,.02,.02,.08,0,-.045,-.19,'bl');B(g,.032,.032,.04,0,.015,w.mz+.04,'bl');B(g,.055,.012,.12,0,.05,-.32,'gd')}else B(g,.03,.012,.07,0,-.04,-.15,'bl');g.traverse(o=>{if(o.isMesh&&[MT.dk,MT.gn,MT.wd,MT.gd].includes(o.material)){o.userData.sk=1;o.material=o.material.clone();o.userData.orig=o.material.color.getHex()}});return g}
+const SHN=[];
+function applySkins(){SHN.length=0;G.forEach((g,i)=>{const k=WS.eq[i]||0;g.traverse(o=>{if(!o.userData.sk)return;const m=o.material,ra=k?SK[k][2]:-1;m.color.setHex(k?SK[k][1]:o.userData.orig);m.emissive.setHex(0);m.shininess=ra===2?240:ra===1?150:70;m.specular.setHex(ra>=1?0xffffff:0x666666);if(ra===1)m.emissive.copy(new T.Color(SK[k][1])).multiplyScalar(.22);if(ra===2){m.userData.c=SK[k][1];SHN.push(m)}})})}
 const vm=new T.Group();C.add(vm);const G=WP.map((w,i)=>{const g=gun(i);g.visible=!i;vm.add(g);return g});applySkins();
 B(vm,.075,.075,.13,0,-.075,-.1,'gl');B(vm,.075,.075,.15,-.01,-.04,-.46,'gl');B(vm,.09,.09,.55,.1,-.2,.2,'sl',.45);B(vm,.09,.09,.55,-.12,-.15,-.1,'sl',.25);B(vm,.07,.02,.09,0,-.04,-.1,'gl');B(vm,.08,.03,.05,-.01,-.065,-.5,'gl');B(vm,.02,.03,.07,.045,-.05,-.12,'gl',.3);B(vm,.1,.04,.06,-.12,-.1,-.3,'gl');
 const flash=new T.Mesh(new T.PlaneGeometry(.24,.24),new T.MeshBasicMaterial({color:0xffb84a,transparent:true,opacity:.95,depthWrite:false}));flash.visible=false;vm.add(flash);const fl2=new T.PointLight(0xffa040,0,9);vm.add(fl2);vm.position.set(.2,-.2,-.4);
@@ -226,13 +241,13 @@ const shotSnd=(w,pos,v)=>{const q=WP[w],vv=v*ST.vg,r=.94+Math.random()*.12,sn=!!
 
 // ---- state ----
 const k={};let locked=false,fire=false,zoom=false,running=false,online=false,started=false,need=1,code='',room=null,myId='',myName='Player',myTeam=0,mapM,ft=0,pt=0;
-const P={pos:new T.Vector3(0,0,34),vx:0,vz:0,vy:0,yaw:0,pitch:0,rec:0,yk:0,hp:100,w:0,money:800,prim:-1,sec:0,am:WP.map(w=>w.mag),rs:WP.map(w=>w.res),rl:0,cd:0,og:true,burst:0,smk:2};
+const P={pos:new T.Vector3(0,0,34),vx:0,vz:0,vy:0,yaw:0,pitch:0,rec:0,yk:0,hp:100,w:0,money:800,prim:-1,sec:0,am:WP.map(w=>w.mag),rs:WP.map(w=>w.res),rl:0,cd:0,og:true,burst:0,smk:2,kn:12};
 let me=null,bots=[],rem={},smokes=[],nades=[],fx=[],dead=false,over=false,freeze=999,timeLeft=115,s0=0,s1=0,rnd=0,flashT=0,banner='',fstep=0;
 const rc=new T.Raycaster(),eye=new T.Vector3(),tgt=new T.Vector3(),tv=new T.Vector3();
 addEventListener('keydown',e=>{k[e.code]=1;if(!running||e.target.tagName==='INPUT')return;if(e.code==='KeyR')reload();if(e.code==='KeyG')nade();if(e.code==='KeyB')toggleBuy();if(e.code==='KeyE')pickup();if(e.code==='Digit1'&&P.prim>=0)selW(P.prim);if(e.code==='Digit2')selW(P.sec);if(e.code==='KeyQ')selW(P.w===P.sec&&P.prim>=0?P.prim:P.sec)});addEventListener('keyup',e=>k[e.code]=0);
 addEventListener('mousemove',e=>{if(!locked)return;const z=(zoom?WP[P.w].z/75*ST.scs:1)*ST.sens;P.yaw-=e.movementX*.0022*z;P.pitch=Math.max(-1.5,Math.min(1.5,P.pitch-e.movementY*.0022*z))});
 addEventListener('mousedown',e=>{if(!locked)return;if(e.button===0){fire=true;if(!WP[P.w].au)shoot()}if(e.button===2&&!dead&&P.rl<=0)zoom=!zoom});addEventListener('mouseup',()=>fire=false);addEventListener('contextmenu',e=>e.preventDefault());
-const CTL='<b>WASD</b> mișcare · <b>Mouse</b> țintire<br><b>Click stânga</b> foc · <b>Click dreapta</b> scop/zoom<br><b>R</b> reîncărcare · <b>G</b> grenadă smoke<br><b>B</b> meniu cumpărare (la început de rundă)<br><b>1</b> armă principală · <b>2</b> pistol · <b>Q</b> schimbă · <b>E</b> ridică arma<br><b>Space</b> sărit · <b>Shift</b> mers încet · <b>Ctrl</b> ghemuit<br><b>Esc</b> pauză / meniu';$('ctl').innerHTML=CTL;$('rs').onclick=()=>{myName=($('nm2').value||myName).slice(0,12);if(room)room.presence({n:myName});R.domElement.requestPointerLock()};$('mn').onclick=()=>location.reload();R.domElement.addEventListener('click',()=>{if(running&&!locked&&!buyOpen)R.domElement.requestPointerLock()});$('bc').onclick=()=>toggleBuy(false);
+const CTL='<b>WASD</b> mișcare · <b>Mouse</b> țintire<br><b>Click stânga</b> foc · <b>Click dreapta</b> scop/zoom<br><b>R</b> reîncărcare · <b>G</b> grenadă smoke<br><b>B</b> meniu cumpărare (la început de rundă)<br><b>1</b> armă principală · <b>2</b> pistol · <b>Q</b> schimbă · <b>3</b> cuțit · <b>E</b> ridică arma · <b>I</b> inventar<br><b>Space</b> sărit · <b>Shift</b> mers încet · <b>Ctrl</b> ghemuit<br><b>Esc</b> pauză / meniu';$('ctl').innerHTML=CTL;$('rs').onclick=()=>{myName=($('nm2').value||myName).slice(0,12);if(room)room.presence({n:myName});R.domElement.requestPointerLock()};$('mn').onclick=()=>location.reload();R.domElement.addEventListener('click',()=>{if(running&&!locked&&!buyOpen)R.domElement.requestPointerLock()});$('bc').onclick=()=>toggleBuy(false);
 document.addEventListener('pointerlockchange',()=>{locked=document.pointerLockElement===R.domElement;if(running)$('ov').style.display=(locked||buyOpen)?'none':'flex';fire=false});
 
 // fp = cât din viață se stinge (0..1), dp: 1 = șterge geometria+materialul, 2 = doar materialul
@@ -268,7 +283,7 @@ const nameOf=id=>{const p=peers().find(p=>p.peer===id);return(p&&p.presence.n)||
 // ---- actions ----
 function hurt(d,from){if(dead||over||freeze>0)return;P.hp-=d;flashT=.5;snd({d:.14,f:1100,v:.75,th:160,te:55,td:.14});if(P.hp<=0){P.hp=0;dead=true;fire=false;zoom=false;banner='Ai murit';if(!online){dropW(P.w,P.pos);setTimeout(()=>end(1-myTeam),1500)}if(online&&room){room.emit('kill',{k:from,w:P.w,x:P.pos.x,y:P.pos.y,z:P.pos.z});feed(nameOf(from),nameOf(myId))}}}
 function reload(){const w=WP[P.w];if(P.rl>0||P.am[P.w]>=w.mag||P.rs[P.w]<=0||dead)return;P.rl=w.mag>12?2.1:1.6;zoom=false;snd({d:.05,f:3000,ft:'bandpass',q:2,e:1,k:3,v:.45,th:500,te:250,td:.05,tg:.12,s:1});setTimeout(()=>snd({d:.08,f:1600,k:2.5,v:.6,th:260,te:90,td:.09,tg:.5,s:1}),P.rl*550);setTimeout(()=>snd({d:.05,f:2600,ft:'bandpass',q:3,e:1,k:3,v:.4,s:1}),P.rl*900)}
-function shoot(){const w=WP[P.w];if(P.cd>0||P.rl>0||dead||freeze>0||over)return;if(P.am[P.w]<=0){if(P.rs[P.w]<=0){P.cd=.3;snd({d:.025,f:3200,ft:'bandpass',q:3,e:1,k:3,v:.4,th:600,te:300,td:.04,tg:.1})}reload();return}
+function shoot(){const w=WP[P.w];if(P.cd>0||P.rl>0||dead||freeze>0||over)return;if(w.kn){stab(w);return}if(P.am[P.w]<=0){if(P.rs[P.w]<=0){P.cd=.3;snd({d:.025,f:3200,ft:'bandpass',q:3,e:1,k:3,v:.4,th:600,te:300,td:.04,tg:.1})}reload();return}
  P.am[P.w]--;P.cd=Math.max(P.cd,-.02)+w.r;const bi=P.burst,mv=Math.hypot(P.vx,P.vz),sp=(w.sp+bi*.0018*(w.au?1:0)+mv*.0014+(P.og?0:.04)+(w.sn&&!zoom?.05:0))*(k.ControlLeft?.65:1)*(mv<.8&&P.og&&bi<1?.2:1);P.burst=Math.min(bi+1,12);
  C.updateMatrixWorld();const an=Math.random()*6.2832,rr=Math.sqrt(Math.random())*sp,d=new T.Vector3(Math.cos(an)*rr,Math.sin(an)*rr,-1).normalize().applyQuaternion(C.quaternion);
  rc.set(C.position,d);rc.far=200;const tg=wm.slice();bots.forEach(b=>tg.push(...b.parts));Object.values(rem).forEach(c=>{if(c.g.visible&&c.team!==myTeam)tg.push(...c.parts)});const h=rc.intersectObjects(tg)[0];
@@ -282,12 +297,20 @@ function shoot(){const w=WP[P.w];if(P.cd>0||P.rl>0||dead||freeze>0||over)return;
    if(b){b.hp-=dm;if(b.hp<=0)killBot(b,hs)}else if(room)room.emit('hit',{to:ud.peer,d:dm})}
   else{impact(h.point,nr,0x9a8c74,6,2.2);impact(h.point,nr,0xffe2a0,3,4.5);hole(h.point,nr)}}
  if(w.sn)zoom=false}
+let stabA=0;
+function stab(w){P.cd=w.r;C.updateMatrixWorld();const d=new T.Vector3(0,0,-1).applyQuaternion(C.quaternion);rc.set(C.position,d);rc.far=2.7;
+ const tg=wm.slice();bots.forEach(b=>tg.push(...b.parts));Object.values(rem).forEach(c=>{if(c.g.visible&&c.team!==myTeam)tg.push(...c.parts)});
+ const h=rc.intersectObjects(tg)[0];vm.position.z-=.34;vm.position.y+=.05;vm.position.x-=.14;stabA=1;snd({d:.09,f:1400,v:.35});
+ if(!h)return;const ud=h.object.userData;
+ if(ud.bot||ud.peer){const nr=h.face?h.face.normal.clone().transformDirection(h.object.matrixWorld):new T.Vector3(0,1,0),dm=w.d,b=ud.bot,dl=b?Math.max(0,Math.min(dm,b.hp)):Math.min(dm,100),kl=!!b&&b.hp-dm<=0;
+  $('hm').style.opacity=1;$('hm').style.color='#fff';clearTimeout(hmT);hmT=setTimeout(()=>$('hm').style.opacity=0,120);hitSnd(false,kl);dmgPop(dl,false,kl);impact(h.point,nr,0xb01414,7,2.4);
+  if(b){b.hp-=dm;if(b.hp<=0)killBot(b,false)}else if(room)room.emit('hit',{to:ud.peer,d:dm})}}
 function killBot(b,hs){dropW(b.wi,b.g.position);P.money=Math.min(16000,P.money+300);S.remove(b.g);bots=bots.filter(x=>x!==b);feed('<b style="color:var(--ct)">Tu</b>'+(hs?' 🎯':''),'<b style="color:var(--t)">Bot</b>');if(!bots.length)end(myTeam)}
 function nade(){if(P.smk<=0||dead||freeze>0)return;P.smk--;C.updateMatrixWorld();const d=new T.Vector3(0,.25,-1).normalize().applyQuaternion(C.quaternion);const m=new T.Mesh(new T.SphereGeometry(.09,8,8),mat(0x667766));m.position.copy(C.position);S.add(m);nades.push({m,v:d.multiplyScalar(15),t:0})}
 function popSmoke(p){const g=new T.Group(),mt=new T.SpriteMaterial({map:smokeTex,transparent:true,opacity:.95,depthWrite:false,fog:false}),sp=[];for(let i=0;i<20;i++){const s=new T.Sprite(mt);s.position.set(p.x+(Math.random()-.5)*3,.8+Math.random()*2.6,p.z+(Math.random()-.5)*3);s.scale.setScalar(.5);s.userData.tg=4.5+Math.random()*2;g.add(s);sp.push(s)}S.add(g);smokes.push({p:new T.Vector3(p.x,1.6,p.z),g,sp,mt,age:0,life:18});snd({d:.5,f:1200,v:.6,pos:p})}
 function end(w){if(over)return;over=true;if(w===0)s0++;else s1++;P.money=Math.min(16000,P.money+((myTeam===w)?3250:1400));banner=(w===0?'Contra-teroriștii':'Teroriștii')+' câștigă runda';
  if(s0>=5||s1>=5){const win=(myTeam===(s0>=5?0:1)),g=win?400:150;WS.coins+=g;saveW();banner=(win?'🏆 Ai câștigat meciul!':'Ai pierdut meciul')+' · +'+g+' monede';setTimeout(()=>{s0=s1=0;rnd=0;P.money=800;P.prim=-1;P.sec=0;dead=false;newRound()},6500)}else setTimeout(newRound,3600)}
-function newRound(){dRound=0;dStreak=0;drops.forEach(d=>{S.remove(d.m);S.remove(d.ring)});drops=[];if(dead){P.prim=-1;P.sec=0}bots.forEach(b=>S.remove(b.g));bots=[];smokes.forEach(s=>S.remove(s.g));smokes=[];nades.forEach(n=>S.remove(n.m));nades=[];
+function newRound(){P.kn=knifeId();dRound=0;dStreak=0;drops.forEach(d=>{S.remove(d.m);S.remove(d.ring)});drops=[];if(dead){P.prim=-1;P.sec=0}bots.forEach(b=>S.remove(b.g));bots=[];smokes.forEach(s=>S.remove(s.g));smokes=[];nades.forEach(n=>S.remove(n.m));nades=[];
  Object.assign(P,{vx:0,vz:0,vy:0,pitch:0,rec:0,yk:0,hp:100,rl:0,cd:0,burst:0,smk:2,am:WP.map(w=>w.mag),rs:WP.map(w=>w.res)});
  let idx=0;if(online){myTeam=teamOf(myId);idx=ids().filter(x=>teamOf(x)===myTeam).indexOf(myId)}else myTeam=pref;if(P.sec<=1)P.sec=myTeam?1:0;
  P.pos.set(-6+idx*12+(Math.random()-.5)*3,0,myTeam?-34:34);P.yaw=myTeam?Math.PI:0;
@@ -311,7 +334,7 @@ function update(dt){
  const sm=Math.hypot(P.vx,P.vz),ey=dead?.3:(k.ControlLeft?1.2:1.65);
  C.position.set(P.pos.x,P.pos.y+ey+Math.sin(performance.now()/110)*.012*sm/5,P.pos.z);C.rotation.set(P.pitch+P.rec,P.yaw+P.yk,dead?.8:0,'YXZ');
  if(me){me.g.visible=!dead&&!(zoom&&WP[P.w].sn);me.g.position.set(P.pos.x+Math.sin(P.yaw)*.22,P.pos.y,P.pos.z+Math.cos(P.yaw)*.22);me.g.rotation.y=P.yaw;me.g.scale.y=k.ControlLeft?.78:1;walk(me,sm,dt)}
- vm.position.x+=((zoom?.04:.2)+Math.sin(performance.now()/220)*.004*sm/5-vm.position.x)*Math.min(1,dt*10);vm.position.y+=((P.rl>0?-.3:zoom?-.12:-.2)-vm.position.y)*Math.min(1,dt*10);vm.position.z+=(-.4-vm.position.z)*Math.min(1,dt*14);vm.rotation.x=P.rl>0?-.7*Math.sin(Math.PI*(1-P.rl/1.9)):0;
+ vm.position.x+=((zoom?.04:.2)+Math.sin(performance.now()/220)*.004*sm/5-vm.position.x)*Math.min(1,dt*10);vm.position.y+=((P.rl>0?-.3:zoom?-.12:-.2)-vm.position.y)*Math.min(1,dt*10);vm.position.z+=(-.4-vm.position.z)*Math.min(1,dt*14);vm.rotation.x=P.rl>0?-.7*Math.sin(Math.PI*(1-P.rl/1.9)):0;vm.rotation.z=stabA*.8;stabA=Math.max(0,stabA-dt*6);
  // network
  if(room&&started){pt-=dt;if(pt<=0){pt=.066;room.presence({n:myName,tm:pref,x:+P.pos.x.toFixed(2),y:+P.pos.y.toFixed(2),z:+P.pos.z.toFixed(2),yw:+P.yaw.toFixed(2),a:dead?0:1,r:rnd})}
   for(const p of pe){if(p.sameTab||p.isMe&&false)continue;if(p.isMe)continue;let c=rem[p.peer];if(!c)c=rem[p.peer]=mkChar(teamOf(p.peer)),c.parts.forEach(x=>x.userData.peer=p.peer);const q=p.presence;c.team=teamOf(p.peer);if(c.look!==c.team)setLook(c,c.team);
@@ -338,7 +361,7 @@ function toggleBuy(f){if(!running)return;if(buyOpen||f===false){buyOpen=false;$(
 function renderBuy(){$('bm').textContent='$'+P.money;const L=$('bl');L.innerHTML='';[['Pistoale',1,4],['SMG',5,6],['Pușți',7,9],['Lunetă',10,11]].forEach(([t,a,b])=>{const h=document.createElement('h3');h.textContent=t;L.appendChild(h);const r=document.createElement('div');r.className='row';for(let i=a;i<=b;i++){const w=WP[i],e=document.createElement('div'),own=P.prim===i||P.sec===i;e.className='o'+(own?' on':'');e.style.opacity=P.money>=w.p||own?1:.4;e.innerHTML=w.n+'<small>corp '+w.d+' · cap '+Math.min(100,Math.round(w.d*2.8))+'</small><small>'+(1/w.r).toFixed(1)+' foc/s · '+w.mag+' gloanțe</small><span class="by">'+(own?'ECHIPAT':'CUMPĂRĂ $'+w.p)+'</span>';e.onclick=()=>buy(i);r.appendChild(e)}L.appendChild(r)})}
 function buy(i){const w=WP[i];if(P.money<w.p||freeze<=0||dead||P.prim===i||P.sec===i)return;P.money-=w.p;if(w.s===0)P.prim=i;else P.sec=i;P.am[i]=w.mag;P.rs[i]=w.res;selW(i);snd({d:.08,f:2000,v:.5});renderBuy()}
 let drops=[];
-function dropW(wi,p){if(wi==null||wi<0)return;const m=gun(wi);m.scale.multiplyScalar(1.3);m.rotation.z=Math.PI/2;const y=p.y||0;m.position.set(p.x,y+.25,p.z);const ring=new T.Mesh(new T.RingGeometry(.5,.62,24),new T.MeshBasicMaterial({color:0xf5a623,side:T.DoubleSide,transparent:true,opacity:.7}));ring.rotation.x=-Math.PI/2;ring.position.set(p.x,y+.04,p.z);S.add(m);S.add(ring);drops.push({w:wi,m,ring,x:p.x,z:p.z,y,t:0})}
+function dropW(wi,p){if(wi==null||wi<0||WP[wi].kn)return;const m=gun(wi);m.scale.multiplyScalar(1.3);m.rotation.z=Math.PI/2;const y=p.y||0;m.position.set(p.x,y+.25,p.z);const ring=new T.Mesh(new T.RingGeometry(.5,.62,24),new T.MeshBasicMaterial({color:0xf5a623,side:T.DoubleSide,transparent:true,opacity:.7}));ring.rotation.x=-Math.PI/2;ring.position.set(p.x,y+.04,p.z);S.add(m);S.add(ring);drops.push({w:wi,m,ring,x:p.x,z:p.z,y,t:0})}
 function nearDrop(){let n=null,bd=2.2;for(const d of drops){const di=Math.hypot(d.x-P.pos.x,d.z-P.pos.z);if(di<bd){bd=di;n=d}}return n}
 function pickup(){const b=nearDrop();if(!b||dead)return;const w=WP[b.w];if(w.s===0)P.prim=b.w;else P.sec=b.w;P.am[b.w]=w.mag;P.rs[b.w]=w.res;P.w=-1;selW(b.w);S.remove(b.m);S.remove(b.ring);drops=drops.filter(x=>x!==b);snd({d:.08,f:2500,v:.5})}
 function dmgPop(n,hs,kill){if(!ST.dmg||n<=0)return;n=Math.round(n);dRound+=n;dStreak+=n;clearTimeout(dStreakT);dStreakT=setTimeout(()=>{dStreak=0;$('dt').style.opacity=0},1600);
@@ -353,8 +376,8 @@ $('oc2').onclick=()=>{if(WS.coins<300)return;WS.coins-=300;const r=Math.random()
 // ---- HUD ----
 const rd=$('rad').getContext('2d');
 function hud(){{const dv=ST.dmg?dRound:-1;if(hud.dv!==dv){hud.dv=dv;$('dr').innerHTML=dv<0?'':'Damage rundă <b>'+dv+'</b>'}}const m=Math.ceil(timeLeft);$('tm').textContent=Math.floor(m/60)+':'+String(m%60).padStart(2,'0');$('ct').textContent=s0;$('tt').textContent=s1;
- $('hp').innerHTML='<small style="font-size:16px;color:#ccc">♥ VIAȚĂ</small> '+Math.ceil(P.hp)+'<div style="width:200px;height:9px;background:#0008;border-radius:5px;margin-top:2px;border:1px solid #fff3"><div style="width:'+P.hp+'%;height:100%;border-radius:5px;background:'+(P.hp>50?'#4c4':P.hp>25?'#ec3':'#e33')+'"></div></div>';$('am').innerHTML=(P.rl>0?'<small>reîncărcare </small>':'')+P.am[P.w]+' <small>/ '+P.rs[P.w]+'</small>'+(P.smk?'<div style="font-size:14px;color:#ccc">☁ smoke ×'+P.smk+'</div>':'');
- $('wl').innerHTML=[P.prim,P.sec].map((i,n)=>i<0?'':(i===P.w?'<b>':'')+(n+1)+' '+WP[i].n+' · '+WP[i].d+' dmg'+(i===P.w?'</b>':'')).join('<br>')+'<br>B cumpără · Q schimbă';$('mo').textContent='$'+P.money;{const n=nearDrop();$('hn').textContent=n&&!dead?'E — ridică '+WP[n.w].n:''}$('fl').style.opacity=flashT;$('msg').textContent=banner||(freeze>0&&started?'Freeze time':'');
+ $('hp').innerHTML='<small style="font-size:16px;color:#ccc">♥ VIAȚĂ</small> '+Math.ceil(P.hp)+'<div style="width:200px;height:9px;background:#0008;border-radius:5px;margin-top:2px;border:1px solid #fff3"><div style="width:'+P.hp+'%;height:100%;border-radius:5px;background:'+(P.hp>50?'#4c4':P.hp>25?'#ec3':'#e33')+'"></div></div>';$('am').innerHTML=(P.rl>0?'<small>reîncărcare </small>':'')+(WP[P.w].kn?'🔪':P.am[P.w]+' <small>/ '+P.rs[P.w]+'</small>')+(P.smk?'<div style="font-size:14px;color:#ccc">☁ smoke ×'+P.smk+'</div>':'');
+ $('wl').innerHTML=[P.prim,P.sec,P.kn].map((i,n)=>i<0?'':(i===P.w?'<b>':'')+(n+1)+' '+WP[i].n+' · '+WP[i].d+' dmg'+(i===P.w?'</b>':'')).join('<br>')+'<br>B cumpără · Q schimbă · I inventar';$('mo').textContent='$'+P.money;{const n=nearDrop();$('hn').textContent=n&&!dead?'E — ridică '+WP[n.w].n:''}$('fl').style.opacity=flashT;$('msg').textContent=banner||(freeze>0&&started?'Freeze time':'');
  const sn2=zoom&&WP[P.w].sn,g=ST.chg+Math.hypot(P.vx,P.vz)*1.2+P.burst*1.2+(P.og?0:8),ci=$('ch').children,L=sn2?0:ST.chs,t=ST.cht,h=t/2;$('ch').style.setProperty('--c',ST.chc);$('ch').style.opacity=sn2?0:ST.cho;
  ci[0].style.cssText=`left:${-h}px;top:${-g-L}px;width:${t}px;height:${L}px`;ci[1].style.cssText=`left:${-h}px;top:${g}px;width:${t}px;height:${L}px`;ci[2].style.cssText=`top:${-h}px;left:${-g-L}px;height:${t}px;width:${L}px`;ci[3].style.cssText=`top:${-h}px;left:${g}px;height:${t}px;width:${L}px`;ci[4].style.cssText=ST.chd?`left:${-h-.5}px;top:${-h-.5}px;width:${t+1}px;height:${t+1}px`:'display:none';
  rd.clearRect(0,0,150,150);rd.save();rd.beginPath();rd.arc(75,75,73,0,7);rd.clip();rd.fillStyle='rgba(20,22,28,.78)';rd.fillRect(0,0,150,150);
@@ -365,7 +388,7 @@ function hud(){{const dv=ST.dmg?dRound:-1;if(hud.dv!==dv){hud.dv=dv;$('dr').inne
  bots.forEach(b=>b.sees&&dot(b.g.position,'#f33'));Object.values(rem).forEach(c=>{if(c.g.visible&&(c.team===myTeam?1:c.sees))dot(c.g.position,c.team===myTeam?'#6ea8ff':'#f33')});
  rd.fillStyle='#fff';rd.beginPath();rd.moveTo(75,66);rd.lineTo(70,82);rd.lineTo(80,82);rd.fill();rd.restore()}
 let last=performance.now();
-function loop(now){requestAnimationFrame(loop);const dt=Math.min((now-last)/1000,.05);last=now;if(running){if(locked||buyOpen||online)update(dt);hud()}R.render(S,C)}
+function loop(now){requestAnimationFrame(loop);SHN.forEach(m=>{m.emissive.set(m.userData.c).multiplyScalar(.1+.35*(.5+.5*Math.sin(now/350)))});const dt=Math.min((now-last)/1000,.05);last=now;if(running){if(locked||buyOpen||online)update(dt);hud()}R.render(S,C)}
 
 // ---- start ----
 async function launch(){ac();myName=($('nm').value||'Player').slice(0,12);$('nm2').value=myName;mapM=MAPS[mm];buildMap(mapM);need=MODES[ms][3];online=need>1;code=($('cd').value||'meci1').toLowerCase().replace(/[^a-z0-9]/g,'');
@@ -377,7 +400,7 @@ requestAnimationFrame(loop);
 
 // ================= DEVICE =================
 let TCH=false;const tcE=$('tc');
-const CTLT='<b>Joystick stânga</b> mișcare · <b>Trage pe dreapta</b> țintire<br><b>FOC</b> tragere · <b>SCOP</b> zoom · <b>SARI</b> · <b>GHEM</b> ghemuit<br><b>R</b> reîncărcare · <b>SMK</b> grenadă · <b>B</b> cumpără · <b>E</b> ridică · <b>⇄</b> schimbă arma<br><b>☰</b> pauză';
+const CTLT='<b>Joystick stânga</b> mișcare · <b>Trage pe dreapta</b> țintire<br><b>FOC</b> tragere · <b>SCOP</b> zoom · <b>SARI</b> · <b>GHEM</b> ghemuit<br><b>R</b> reîncărcare · <b>SMK</b> grenadă · <b>B</b> cumpără · <b>E</b> ridică · <b>⇄</b> schimbă arma · <b>🔪</b> cuțit · <b>🎒</b> inventar<br><b>☰</b> pauză';
 function setDev(t){TCH=t;document.body.classList.toggle('t',t);$('dev').style.display='none';
  if(t){$('ctl').innerHTML=CTLT;try{const r=document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}try{screen.orientation&&screen.orientation.lock&&screen.orientation.lock('landscape').catch(()=>{})}catch(e){}}}
 $('dpc').onclick=()=>setDev(false);$('dph').onclick=()=>setDev(true);
@@ -394,7 +417,7 @@ $('dpc').onclick=()=>setDev(false);$('dph').onclick=()=>setDev(true);
  lz.addEventListener('touchstart',e=>{e.preventDefault();if(lid!==null)return;const t=e.changedTouches[0];lid=t.identifier;lp={x:t.clientX,y:t.clientY}},{passive:false});
  lz.addEventListener('touchmove',e=>{e.preventDefault();for(const t of e.changedTouches)if(t.identifier===lid&&locked){const z=(zoom?WP[P.w].z/75*ST.scs:1)*ST.sens;P.yaw-=(t.clientX-lp.x)*.0055*z;P.pitch=Math.max(-1.5,Math.min(1.5,P.pitch-(t.clientY-lp.y)*.0055*z));lp={x:t.clientX,y:t.clientY}}},{passive:false});
  const le=e=>{e.preventDefault();for(const t of e.changedTouches)if(t.identifier===lid)lid=null};lz.addEventListener('touchend',le,{passive:false});lz.addEventListener('touchcancel',le,{passive:false});
- const down={
+ const down={knife:()=>{if(locked)selW(P.kn)},inv:()=>toggleInvG(),
   fire:()=>{if(!locked||dead)return;fire=true;if(!WP[P.w].au)shoot()},
   scope:()=>{if(locked&&!dead&&P.rl<=0)zoom=!zoom},
   jump:()=>{k.Space=1},rel:()=>{if(locked)reload()},
@@ -452,4 +475,22 @@ $('lbc').onclick=()=>{if(!lob)return;let c=cleanCode($('cd').value);if(c==='meci
 $('lbx').onclick=()=>{lobPres('m');closeLobby()};
 setInterval(()=>{if(lob&&online&&running)lobPres(started?'p':'w')},1500);
 $('go').onclick=()=>{if(MODES[ms][3]>1)openLobby();else begin()};
+// ================= KNIFE / KARAMBIT / INVENTORY =================
+const KAR_PRICE=600;
+function knifeId(){return WS.kar&&WS.knife===13?13:12}
+function equipKnife(id){WS.knife=id;saveW();P.kn=knifeId();if(P.w>=12&&!dead){P.w=-1;selW(P.kn)}renderInv()}
+function renderKnives(){const K=$('ks');if(!K)return;K.innerHTML='';$('ksm').textContent='';
+ [[12,'Cuțit','Standard · gratis',1],[13,'Karambit','Curbat, cu inel · '+KAR_PRICE+' monede',WS.kar]].forEach(([id,n,sub,own])=>{
+  const e=document.createElement('div'),on=knifeId()===id;e.className='o'+(on?' on':'');
+  e.innerHTML=n+'<small>'+(own?(on?'echipat':'click = echipează'):sub)+'</small>'+(own?'':'<span class="by">CUMPĂRĂ</span>');
+  e.onclick=()=>{if(own){equipKnife(id);return}
+   if(WS.coins<KAR_PRICE){$('ksm').textContent='Îți trebuie '+KAR_PRICE+' monede (le câștigi câștigând meciuri). Ai '+WS.coins+'.';return}
+   WS.coins-=KAR_PRICE;WS.kar=1;saveW();equipKnife(13)};K.appendChild(e)})}
+{const _ri=renderInv;renderInv=function(){_ri();renderKnives()}}
+let invG=false;
+function toggleInvG(){if(!running)return;if(invG){closeInvG();return}if(buyOpen)return;invG=true;fire=false;zoom=false;renderInv();$('inv').style.display='flex';try{document.exitPointerLock()}catch(e){}if(TCH)locked=false}
+function closeInvG(){if(!invG)return;invG=false;$('inv').style.display='none';if(TCH){locked=true;$('ov').style.display='none'}else{try{R.domElement.requestPointerLock()}catch(e){}}}
+$('ix').addEventListener('click',()=>{if(invG)closeInvG()});
+addEventListener('keydown',e=>{if(!running||e.target.tagName==='INPUT')return;if(e.code==='Digit3')selW(P.kn);if(e.code==='KeyI')toggleInvG()});
+
 </script></body></html>
