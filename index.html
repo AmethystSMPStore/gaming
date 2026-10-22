@@ -52,11 +52,16 @@ body.t #rad{width:110px;height:110px}
 <h3>Mod de joc</h3><div id="modes" class="row"></div>
 <div id="oc" style="display:none"><label class="s">Cod cameră (același la toți jucătorii)<input id="cd" maxlength="10" value="meci1"></label></div>
 <h3>Echipă</h3><div id="teams" class="row"></div><h3>Hartă</h3><div id="maps" class="row"></div>
-<button id="go">START MECI</button><div class="row"><button class="bst" style="background:#444;color:#fff">SETĂRI</button><button class="binv" style="background:#444;color:#fff">CUTII &amp; SKINURI</button></div>
+<button id="go">START MECI</button><div class="row"><button class="bst" style="background:#444;color:#fff">SETĂRI</button><button class="binv" style="background:#444;color:#fff">CUTII &amp; SKINURI</button></div><button class="bsh">🛒 SHOP</button>
 <p class="s">WASD · mouse · click stânga foc · click dreapta scop · B cumpără · 1/2/Q arme · R reîncărcare · G smoke · Space sărit · Shift mers încet · Ctrl ghemuit. Online (1v1 / 2v2): apeși START și intri în LOBBY — vezi cine e online, intri într-un meci deschis sau creezi unul. Poți adăuga prieteni cu ★.</p></div></div>
-<div id="buy"><div class="box"><h1 style="font-size:28px">CUMPĂRARE <span id="bm"></span></h1><div id="bl"></div><button id="bc">ÎNCHIDE (B)</button></div></div><div id="st" class="pn"><div class="box"><h1 style="font-size:28px">SETĂRI</h1><div id="sl"></div><button id="sx">ÎNAPOI</button></div></div><div id="inv" class="pn"><div class="box"><h1 style="font-size:28px">CUTII &amp; SKINURI <span id="co"></span></h1><button id="oc2">DESCHIDE CUTIE · 300 monede</button><div id="cr" class="s" style="font-size:15px;min-height:28px"></div><h3>Cuțite</h3><div id="ks" class="row"></div><div class="s" id="ksm"></div><h3>Inventar (click = echipează)</h3><div id="il" class="row"></div><button id="ix">ÎNAPOI</button></div></div><div id="ov"><div class="box"><h1>PAUZĂ</h1><label class="s">Nume jucător<input id="nm2" maxlength="12"></label><h3>Controale</h3><div class="s" id="ctl" style="font-size:14px;color:#dde"></div><button id="rs">CONTINUĂ</button><button id="bb" style="background:#2a7a3a;color:#fff">CUMPĂRĂ ARME (B)</button><div class="row"><button class="bst" style="background:#444;color:#fff">SETĂRI</button><button class="binv" style="background:#444;color:#fff">CUTII &amp; SKINURI</button></div><button id="mn" style="background:#444;color:#fff">Meniu principal</button></div></div>
+<div id="buy"><div class="box"><h1 style="font-size:28px">CUMPĂRARE <span id="bm"></span></h1><div id="bl"></div><button id="bc">ÎNCHIDE (B)</button></div></div><div id="st" class="pn"><div class="box"><h1 style="font-size:28px">SETĂRI</h1><div id="sl"></div><button id="sx">ÎNAPOI</button></div></div><div id="inv" class="pn"><div class="box"><h1 style="font-size:28px">CUTII &amp; SKINURI <span id="co"></span></h1><button id="oc2">DESCHIDE CUTIE · 300 monede</button><div id="cr" class="s" style="font-size:15px;min-height:28px"></div><h3>Cuțite</h3><div id="ks" class="row"></div><div class="s" id="ksm"></div><h3>Inventar (click = echipează)</h3><div id="il" class="row"></div><button id="ix">ÎNAPOI</button></div></div><div id="ov"><div class="box"><h1>PAUZĂ</h1><label class="s">Nume jucător<input id="nm2" maxlength="12"></label><h3>Controale</h3><div class="s" id="ctl" style="font-size:14px;color:#dde"></div><button id="rs">CONTINUĂ</button><button id="bb" style="background:#2a7a3a;color:#fff">CUMPĂRĂ ARME (B)</button><div class="row"><button class="bst" style="background:#444;color:#fff">SETĂRI</button><button class="binv" style="background:#444;color:#fff">CUTII &amp; SKINURI</button></div><button class="bsh">🛒 SHOP</button><button id="mn" style="background:#444;color:#fff">Meniu principal</button></div></div>
 <div id="vg"></div>
 <div id="dev"><div class="box"><h1>CS<span>BROWSER ONLINE</span></h1><h3>Pe ce joci?</h3><div class="row"><div class="o" id="dpc">💻 PC<small>tastatură + mouse</small></div><div class="o" id="dph">📱 Telefon<small>controale pe ecran (ține telefonul orizontal)</small></div></div></div></div>
+<div id="sh" class="pn"><div class="box"><h1 style="font-size:28px">🛒 SHOP <span id="shc"></span></h1>
+<button id="shcase"></button><div class="s" id="shm" style="font-size:15px;min-height:22px"></div>
+<h3>Cuțite</h3><div id="shk" class="row"></div><div class="s" id="shkm"></div>
+<h3>Skinuri pentru cuțit</h3><div class="row"><div class="o" id="sht0">Cuțit</div><div class="o" id="sht1">Karambit</div></div><div id="shs" class="row" style="margin-top:8px"></div>
+<button id="shx" style="background:#444;color:#fff">ÎNAPOI</button></div></div>
 <div id="lb" class="pn"><div class="box"><h1 id="lbt" style="font-size:26px"></h1><div class="s" id="lbs"></div>
 <button id="lbc">CREEAZĂ MECI</button>
 <h3>Meciuri deschise (apasă ca să intri)</h3><div id="lbl"></div>
@@ -81,6 +86,7 @@ body.t #rad{width:110px;height:110px}
 <div id="ch" class="h"><i></i><i></i><i></i><i></i><i></i></div><div id="hm" class="h">✕</div><div id="fl" class="h"></div><div id="sco" class="h"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
+(function(){const show=m=>{let e=document.getElementById('errb');if(!e){e=document.createElement('div');e.id='errb';e.style.cssText='position:fixed;left:8px;right:8px;top:8px;z-index:99;background:#b00020;color:#fff;padding:8px 12px;border-radius:8px;font:13px/1.4 sans-serif;cursor:pointer';e.onclick=()=>e.remove();document.body.appendChild(e)}e.textContent='Eroare: '+m+' (atinge ca să închizi)'};addEventListener('error',ev=>show(ev.message||'necunoscută'));addEventListener('unhandledrejection',ev=>show((ev.reason&&ev.reason.message)||String(ev.reason)))})();
 const T=THREE,$=i=>document.getElementById(i);
 let ST={sens:1,scs:1,fov:75,vol:1,vg:1,vs:.6,chs:7,cht:2,chg:4,chd:0,cho:1,chc:'#33ff33',dmg:1,shd:1};try{Object.assign(ST,JSON.parse(localStorage.getItem('csst')||'{}'))}catch(e){}
 const SAVE=()=>{try{localStorage.setItem('csst',JSON.stringify(ST))}catch(e){}};
@@ -305,7 +311,7 @@ function stab(w){P.cd=w.r;C.updateMatrixWorld();const d=new T.Vector3(0,0,-1).ap
  if(ud.bot||ud.peer){const nr=h.face?h.face.normal.clone().transformDirection(h.object.matrixWorld):new T.Vector3(0,1,0),dm=w.d,b=ud.bot,dl=b?Math.max(0,Math.min(dm,b.hp)):Math.min(dm,100),kl=!!b&&b.hp-dm<=0;
   $('hm').style.opacity=1;$('hm').style.color='#fff';clearTimeout(hmT);hmT=setTimeout(()=>$('hm').style.opacity=0,120);hitSnd(false,kl);dmgPop(dl,false,kl);impact(h.point,nr,0xb01414,7,2.4);
   if(b){b.hp-=dm;if(b.hp<=0)killBot(b,false)}else if(room)room.emit('hit',{to:ud.peer,d:dm})}}
-function killBot(b,hs){dropW(b.wi,b.g.position);P.money=Math.min(16000,P.money+300);S.remove(b.g);bots=bots.filter(x=>x!==b);feed('<b style="color:var(--ct)">Tu</b>'+(hs?' 🎯':''),'<b style="color:var(--t)">Bot</b>');if(!bots.length)end(myTeam)}
+function killBot(b,hs){dropW(b.wi,b.g.position);P.money=Math.min(16000,P.money+300);WS.coins+=15;saveW();S.remove(b.g);bots=bots.filter(x=>x!==b);feed('<b style="color:var(--ct)">Tu</b>'+(hs?' 🎯':''),'<b style="color:var(--t)">Bot</b>');if(!bots.length)end(myTeam)}
 function nade(){if(P.smk<=0||dead||freeze>0)return;P.smk--;C.updateMatrixWorld();const d=new T.Vector3(0,.25,-1).normalize().applyQuaternion(C.quaternion);const m=new T.Mesh(new T.SphereGeometry(.09,8,8),mat(0x667766));m.position.copy(C.position);S.add(m);nades.push({m,v:d.multiplyScalar(15),t:0})}
 function popSmoke(p){const g=new T.Group(),mt=new T.SpriteMaterial({map:smokeTex,transparent:true,opacity:.95,depthWrite:false,fog:false}),sp=[];for(let i=0;i<20;i++){const s=new T.Sprite(mt);s.position.set(p.x+(Math.random()-.5)*3,.8+Math.random()*2.6,p.z+(Math.random()-.5)*3);s.scale.setScalar(.5);s.userData.tg=4.5+Math.random()*2;g.add(s);sp.push(s)}S.add(g);smokes.push({p:new T.Vector3(p.x,1.6,p.z),g,sp,mt,age:0,life:18});snd({d:.5,f:1200,v:.6,pos:p})}
 function end(w){if(over)return;over=true;if(w===0)s0++;else s1++;P.money=Math.min(16000,P.money+((myTeam===w)?3250:1400));banner=(w===0?'Contra-teroriștii':'Teroriștii')+' câștigă runda';
@@ -377,7 +383,7 @@ $('oc2').onclick=()=>{if(WS.coins<300)return;WS.coins-=300;const r=Math.random()
 const rd=$('rad').getContext('2d');
 function hud(){{const dv=ST.dmg?dRound:-1;if(hud.dv!==dv){hud.dv=dv;$('dr').innerHTML=dv<0?'':'Damage rundă <b>'+dv+'</b>'}}const m=Math.ceil(timeLeft);$('tm').textContent=Math.floor(m/60)+':'+String(m%60).padStart(2,'0');$('ct').textContent=s0;$('tt').textContent=s1;
  $('hp').innerHTML='<small style="font-size:16px;color:#ccc">♥ VIAȚĂ</small> '+Math.ceil(P.hp)+'<div style="width:200px;height:9px;background:#0008;border-radius:5px;margin-top:2px;border:1px solid #fff3"><div style="width:'+P.hp+'%;height:100%;border-radius:5px;background:'+(P.hp>50?'#4c4':P.hp>25?'#ec3':'#e33')+'"></div></div>';$('am').innerHTML=(P.rl>0?'<small>reîncărcare </small>':'')+(WP[P.w].kn?'🔪':P.am[P.w]+' <small>/ '+P.rs[P.w]+'</small>')+(P.smk?'<div style="font-size:14px;color:#ccc">☁ smoke ×'+P.smk+'</div>':'');
- $('wl').innerHTML=[P.prim,P.sec,P.kn].map((i,n)=>i<0?'':(i===P.w?'<b>':'')+(n+1)+' '+WP[i].n+' · '+WP[i].d+' dmg'+(i===P.w?'</b>':'')).join('<br>')+'<br>B cumpără · Q schimbă · I inventar';$('mo').textContent='$'+P.money;{const n=nearDrop();$('hn').textContent=n&&!dead?'E — ridică '+WP[n.w].n:''}$('fl').style.opacity=flashT;$('msg').textContent=banner||(freeze>0&&started?'Freeze time':'');
+ $('wl').innerHTML=[P.prim,P.sec,P.kn].map((i,n)=>i<0?'':(i===P.w?'<b>':'')+(n+1)+' '+WP[i].n+' · '+WP[i].d+' dmg'+(i===P.w?'</b>':'')).join('<br>')+'<br>B cumpără · Q schimbă · I / Tab inventar';$('mo').textContent='$'+P.money;{const n=nearDrop();$('hn').textContent=n&&!dead?'E — ridică '+WP[n.w].n:''}$('fl').style.opacity=flashT;$('msg').textContent=banner||(freeze>0&&started?'Freeze time':'');
  const sn2=zoom&&WP[P.w].sn,g=ST.chg+Math.hypot(P.vx,P.vz)*1.2+P.burst*1.2+(P.og?0:8),ci=$('ch').children,L=sn2?0:ST.chs,t=ST.cht,h=t/2;$('ch').style.setProperty('--c',ST.chc);$('ch').style.opacity=sn2?0:ST.cho;
  ci[0].style.cssText=`left:${-h}px;top:${-g-L}px;width:${t}px;height:${L}px`;ci[1].style.cssText=`left:${-h}px;top:${g}px;width:${t}px;height:${L}px`;ci[2].style.cssText=`top:${-h}px;left:${-g-L}px;height:${t}px;width:${L}px`;ci[3].style.cssText=`top:${-h}px;left:${g}px;height:${t}px;width:${L}px`;ci[4].style.cssText=ST.chd?`left:${-h-.5}px;top:${-h-.5}px;width:${t+1}px;height:${t+1}px`:'display:none';
  rd.clearRect(0,0,150,150);rd.save();rd.beginPath();rd.arc(75,75,73,0,7);rd.clip();rd.fillStyle='rgba(20,22,28,.78)';rd.fillRect(0,0,150,150);
@@ -394,7 +400,7 @@ function loop(now){requestAnimationFrame(loop);SHN.forEach(m=>{m.emissive.set(m.
 async function launch(){ac();myName=($('nm').value||'Player').slice(0,12);$('nm2').value=myName;mapM=MAPS[mm];buildMap(mapM);need=MODES[ms][3];online=need>1;code=($('cd').value||'meci1').toLowerCase().replace(/[^a-z0-9]/g,'');
  $('menu').style.display='none';running=true;R.domElement.requestPointerLock();
  if(online){try{const r=window.claude&&await claude.use('room');if(r){room=await r.join('cs-'+code+'-'+MODES[ms][0]+'-'+mm);room.on('hit',m=>{if(m.data&&m.data.to===myId&&!m.sameTab)hurt(Math.min(999,+m.data.d||0),m.peer)});
-   room.on('shot',m=>{const d=m.data;if(!m.isMe&&d)shotSnd(d.w|0,tv.set(d.x,0,d.z),.9)});room.on('kill',m=>{if(m.data&&m.data.x!==undefined)dropW(m.data.w|0,{x:m.data.x,y:m.data.y,z:m.data.z});if(m.data&&m.data.k===myId)P.money=Math.min(16000,P.money+300);if(!m.isMe&&m.data)feed(nameOf(m.data.k),nameOf(m.peer))});await room.presence({n:myName,tm:pref,a:0,r:0})}}catch(e){room=null}}
+   room.on('shot',m=>{const d=m.data;if(!m.isMe&&d)shotSnd(d.w|0,tv.set(d.x,0,d.z),.9)});room.on('kill',m=>{if(m.data&&m.data.x!==undefined)dropW(m.data.w|0,{x:m.data.x,y:m.data.y,z:m.data.z});if(m.data&&m.data.k===myId)P.money=Math.min(16000,P.money+300);WS.coins+=15;saveW();if(!m.isMe&&m.data)feed(nameOf(m.data.k),nameOf(m.peer))});await room.presence({n:myName,tm:pref,a:0,r:0})}}catch(e){room=null}}
  else newRound()}
 requestAnimationFrame(loop);
 
@@ -431,7 +437,7 @@ $('dpc').onclick=()=>setDev(false);$('dph').onclick=()=>setDev(true);
   const u=e=>{e.preventDefault();if(up[a])up[a]()};b.addEventListener('touchend',u,{passive:false});b.addEventListener('touchcancel',u,{passive:false})});
  $('rs').addEventListener('click',()=>{if(TCH){locked=true;$('ov').style.display='none'}});
 }
-function begin(){launch();if(TCH){locked=true;tcE.style.display='block'}}
+function begin(){launch().catch(e=>{$('menu').style.display='flex';throw e});if(TCH){locked=true;tcE.style.display='block'}}
 
 // ================= LOBBY =================
 let RM=null,lob=null,lobT=null;
@@ -466,31 +472,61 @@ async function openLobby(){
  myName=($('nm').value||'Player').slice(0,12);
  $('lb').style.display='flex';$('lbt').textContent='LOBBY · '+MODES[ms][1]+' · '+MAPS[mm].n;$('lbs').textContent='Se conectează…';
  try{if(!RM)RM=window.claude&&await claude.use('room');if(RM&&!lob)lob=await RM.join('cs-lobby-v1')}catch(e){lob=null}
- if(!lob){$('lbs').textContent='Online indisponibil — deschide jocul din artifact (membru/invitat) ca să vezi lobby-ul.';return}
- $('lbs').textContent='';lobPres('l');clearInterval(lobT);lobT=setInterval(renderLobby,800);renderLobby();
+ if(!lob){$('lbs').textContent='Online indisponibil aici (merge doar când jocul e deschis ca artifact). Poți juca totuși contra boților.';$('lbc').textContent='JOACĂ VS BOȚI';return}
+ $('lbs').textContent='';$('lbc').textContent='CREEAZĂ MECI';lobPres('l');clearInterval(lobT);lobT=setInterval(renderLobby,800);renderLobby();
 }
 function closeLobby(){clearInterval(lobT);$('lb').style.display='none'}
 function joinM(x){ms=x.m;mm=x.mp;$('cd').value=x.cd;lobPres('w');closeLobby();begin()}
-$('lbc').onclick=()=>{if(!lob)return;let c=cleanCode($('cd').value);if(c==='meci1'||!$('cd').value)c=Math.random().toString(36).slice(2,7);$('cd').value=c;lobPres('w');closeLobby();begin()};
+$('lbc').onclick=()=>{$('lbs').textContent='Se pornește…';if(!lob){ms=0;closeLobby();begin();return}let c=cleanCode($('cd').value);if(c==='meci1'||!$('cd').value)c=Math.random().toString(36).slice(2,7);$('cd').value=c;lobPres('w');closeLobby();begin()};
 $('lbx').onclick=()=>{lobPres('m');closeLobby()};
 setInterval(()=>{if(lob&&online&&running)lobPres(started?'p':'w')},1500);
 $('go').onclick=()=>{if(MODES[ms][3]>1)openLobby();else begin()};
 // ================= KNIFE / KARAMBIT / INVENTORY =================
-const KAR_PRICE=600;
+const KAR_PRICE=1000;
 function knifeId(){return WS.kar&&WS.knife===13?13:12}
-function equipKnife(id){WS.knife=id;saveW();P.kn=knifeId();if(P.w>=12&&!dead){P.w=-1;selW(P.kn)}renderInv()}
-function renderKnives(){const K=$('ks');if(!K)return;K.innerHTML='';$('ksm').textContent='';
+const PRC=[200,450,900];let shK=12;
+function updShopBtn(){document.querySelectorAll('.bsh').forEach(b=>b.textContent='🛒 SHOP'+(WS.fc>0?' · 🎁 '+WS.fc+' cutie gratuită':''))}
+function refreshAll(){renderInv();if(buyOpen)renderBuy();if($('sh').style.display==='flex')renderShop();updShopBtn()}
+function equipKnife(id){WS.knife=id;saveW();P.kn=knifeId();if(P.w>=12&&!dead){P.w=-1;selW(P.kn)}refreshAll()}
+function knifeRow(K,msg){K.innerHTML='';msg.textContent='';
  [[12,'Cuțit','Standard · gratis',1],[13,'Karambit','Curbat, cu inel · '+KAR_PRICE+' monede',WS.kar]].forEach(([id,n,sub,own])=>{
   const e=document.createElement('div'),on=knifeId()===id;e.className='o'+(on?' on':'');
   e.innerHTML=n+'<small>'+(own?(on?'echipat':'click = echipează'):sub)+'</small>'+(own?'':'<span class="by">CUMPĂRĂ</span>');
   e.onclick=()=>{if(own){equipKnife(id);return}
-   if(WS.coins<KAR_PRICE){$('ksm').textContent='Îți trebuie '+KAR_PRICE+' monede (le câștigi câștigând meciuri). Ai '+WS.coins+'.';return}
+   if(WS.coins<KAR_PRICE){msg.textContent='Îți trebuie '+KAR_PRICE+' monede. Ai '+WS.coins+' (câștigi monede din kill-uri și meciuri câștigate).';return}
    WS.coins-=KAR_PRICE;WS.kar=1;saveW();equipKnife(13)};K.appendChild(e)})}
-{const _ri=renderInv;renderInv=function(){_ri();renderKnives()}}
+function skinRow(C2){C2.innerHTML='';WS.inv.forEach(it=>{const e=document.createElement('div'),on=WS.eq[it.w]===it.k,c='#'+SK[it.k][1].toString(16).padStart(6,0);
+  e.className='o'+(on?' on':'');e.style.borderColor=c;e.innerHTML=WP[it.w].n+'<small style="color:'+c+'">'+SK[it.k][0]+(on?' · echipat':'')+'</small>';
+  e.onclick=()=>{if(on)delete WS.eq[it.w];else WS.eq[it.w]=it.k;saveW();applySkins();refreshAll()};C2.appendChild(e)});
+ if(!WS.inv.length){const s=document.createElement('span');s.className='s';s.textContent='Gol — deschide o cutie sau cumpără din shop.';C2.appendChild(s)}}
+function renderKnives(){const K=$('ks');if(K)knifeRow(K,$('ksm'))}
+{const _ri=renderInv;renderInv=function(){_ri();renderKnives();$('oc2').textContent=WS.fc>0?'DESCHIDE CUTIE GRATUITĂ ('+WS.fc+')':'DESCHIDE CUTIE · 300 monede';$('oc2').style.opacity=(WS.fc>0||WS.coins>=300)?1:.4}}
+{const _rb=renderBuy;renderBuy=function(){_rb();const L=$('bl');
+  const h=document.createElement('h3');h.textContent='Cuțit (inventar)';L.appendChild(h);const r=document.createElement('div');r.className='row';L.appendChild(r);const m=document.createElement('div');m.className='s';L.appendChild(m);knifeRow(r,m);
+  const h2=document.createElement('h3');h2.textContent='Skinurile tale (click = echipează)';L.appendChild(h2);const r2=document.createElement('div');r2.className='row';L.appendChild(r2);skinRow(r2)}}
+function openCase(){if(WS.fc>0)WS.fc--;else{if(WS.coins<300)return;WS.coins-=300}
+ const r=Math.random(),ra=r<.05?2:r<.3?1:0,pool=[];SK.forEach((x,i)=>{if(i&&x[2]===ra)pool.push(i)});const k=pool[Math.random()*pool.length|0],w=Math.random()*WP.length|0;WS.inv.push({w,k});saveW();
+ const t='Ai primit: <b style="color:#'+SK[k][1].toString(16).padStart(6,0)+'">'+WP[w].n+' | '+SK[k][0]+'</b> ('+['comun','rar','legendar'][ra]+')';$('cr').innerHTML=t;$('shm').innerHTML=t;refreshAll()}
+$('oc2').onclick=openCase;$('shcase').onclick=openCase;
+function renderShop(){$('shc').textContent=WS.coins+' monede';
+ $('shcase').textContent=WS.fc>0?'🎁 DESCHIDE CUTIA GRATUITĂ ('+WS.fc+')':'🎁 DESCHIDE CUTIE · 300 monede';$('shcase').style.opacity=(WS.fc>0||WS.coins>=300)?1:.45;
+ knifeRow($('shk'),$('shkm'));$('sht0').classList.toggle('on',shK===12);$('sht1').classList.toggle('on',shK===13);
+ const S2=$('shs');S2.innerHTML='';
+ SK.forEach((s,i)=>{if(!i)return;const own=WS.inv.some(it=>it.w===shK&&it.k===i),eq=WS.eq[shK]===i,c='#'+s[1].toString(16).padStart(6,0),e=document.createElement('div');
+  e.className='o'+(eq?' on':'');e.style.borderColor=c;
+  e.innerHTML=s[0]+'<small style="color:'+c+'">'+['comun','rar','legendar'][s[2]]+'</small><span class="by">'+(eq?'ECHIPAT':own?'ECHIPEAZĂ':'CUMPĂRĂ · '+PRC[s[2]])+'</span>';
+  e.onclick=()=>{if(shK===13&&!WS.kar){$('shkm').textContent='Cumpără întâi Karambit-ul ('+KAR_PRICE+' monede).';return}
+   if(own){if(eq)delete WS.eq[shK];else WS.eq[shK]=i;saveW();applySkins();renderShop();return}
+   if(WS.coins<PRC[s[2]]){$('shm').textContent='Nu ai destule monede (costă '+PRC[s[2]]+', ai '+WS.coins+').';return}
+   WS.coins-=PRC[s[2]];WS.inv.push({w:shK,k:i});WS.eq[shK]=i;saveW();applySkins();$('shm').textContent='Ai cumpărat și echipat '+s[0]+'.';renderShop()};S2.appendChild(e)});
+ updShopBtn()}
+document.querySelectorAll('.bsh').forEach(b=>b.onclick=()=>{$('shm').textContent='';renderShop();$('sh').style.display='flex'});
+$('shx').onclick=()=>{$('sh').style.display='none';updShopBtn()};$('sht0').onclick=()=>{shK=12;renderShop()};$('sht1').onclick=()=>{shK=13;renderShop()};
+if(!WS.gift){WS.gift=1;WS.fc=(WS.fc||0)+1;saveW()}updShopBtn();
 let invG=false;
 function toggleInvG(){if(!running)return;if(invG){closeInvG();return}if(buyOpen)return;invG=true;fire=false;zoom=false;renderInv();$('inv').style.display='flex';try{document.exitPointerLock()}catch(e){}if(TCH)locked=false}
 function closeInvG(){if(!invG)return;invG=false;$('inv').style.display='none';if(TCH){locked=true;$('ov').style.display='none'}else{try{R.domElement.requestPointerLock()}catch(e){}}}
 $('ix').addEventListener('click',()=>{if(invG)closeInvG()});
-addEventListener('keydown',e=>{if(!running||e.target.tagName==='INPUT')return;if(e.code==='Digit3')selW(P.kn);if(e.code==='KeyI')toggleInvG()});
+addEventListener('keydown',e=>{if(!running||e.target.tagName==='INPUT')return;if(e.code==='Digit3')selW(P.kn);if(e.code==='KeyI'||e.code==='Tab'){e.preventDefault();toggleInvG()}});
 
 </script></body></html>
