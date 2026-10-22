@@ -30,6 +30,22 @@ button{padding:14px 20px;background:var(--t);color:#111;border:0;border-radius:8
 .dq small{display:block;font-size:11px;letter-spacing:2px;text-align:center}
 @keyframes dq{0%{opacity:0;transform:translate(0,0) scale(.5)}15%{opacity:1;transform:translate(0,-8px) scale(1.25)}35%{opacity:1;transform:translate(0,-22px) scale(1)}100%{opacity:0;transform:translate(0,-88px) scale(.9)}}
 #vg{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 58%,#0008 100%)}
+
+#dev{position:fixed;inset:0;z-index:30;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 20%,#2b3340,#0e1116 70%)}
+#dev .box{text-align:center}#dev .o{padding:26px 10px;font-size:22px}#dev .o small{font-size:13px}
+.lr{display:flex;align-items:center;gap:8px;padding:8px 10px;margin-bottom:6px;background:#fff1;border:1px solid #fff2;border-radius:8px;font-size:15px}
+.lr b{flex:1;word-break:break-word}.lr em{font-style:normal;color:#9aa;font-size:12px}
+.lr button{width:auto;margin:0;padding:7px 12px;font-size:14px}.fr{color:#ffd24a}
+#tc{position:fixed;inset:0;z-index:5;display:none;pointer-events:none}#tc>*{pointer-events:auto}
+#lz,#jz{position:absolute;top:0;bottom:0;touch-action:none}#lz{left:42%;right:0}#jz{left:0;width:42%;top:35%}
+#jb{position:absolute;width:120px;height:120px;margin:-60px 0 0 -60px;border-radius:50%;background:#fff2;border:2px solid #fff4;pointer-events:none}
+#jk{position:absolute;left:35px;top:35px;width:50px;height:50px;border-radius:50%;background:#fff7}
+.tb{position:absolute;display:flex;align-items:center;justify-content:center;border-radius:50%;background:#ffffff26;border:2px solid #fff6;color:#fff;font-weight:800;font-size:13px;touch-action:none;-webkit-tap-highlight-color:transparent;text-shadow:0 0 3px #000}
+.tb.sm{border-radius:10px}.tb.on,.tb:active{background:#f5a623aa}
+body.t #wl,body.t #dr{display:none}body.t #hp{left:176px;top:8px;bottom:auto;font-size:28px}body.t #hp div{width:120px!important}
+body.t #mo{left:176px;top:62px;bottom:auto;font-size:18px}body.t #am{right:auto;left:50%;transform:translateX(-50%);bottom:6px;font-size:28px;text-align:center}
+body.t #hn{bottom:90px}body.t #msg{font-size:24px}body.t #feed{font-size:12px;top:56px}
+body.t #rad{width:110px;height:110px}
 </style></head><body>
 <div id="menu"><div class="box"><h1>CS<span>BROWSER ONLINE</span></h1>
 <label class="s">Nume jucător<input id="nm" maxlength="12" value="Player"></label>
@@ -37,9 +53,26 @@ button{padding:14px 20px;background:var(--t);color:#111;border:0;border-radius:8
 <div id="oc" style="display:none"><label class="s">Cod cameră (același la toți jucătorii)<input id="cd" maxlength="10" value="meci1"></label></div>
 <h3>Echipă</h3><div id="teams" class="row"></div><h3>Hartă</h3><div id="maps" class="row"></div>
 <button id="go">START MECI</button><div class="row"><button class="bst" style="background:#444;color:#fff">SETĂRI</button><button class="binv" style="background:#444;color:#fff">CUTII &amp; SKINURI</button></div>
-<p class="s">WASD · mouse · click stânga foc · click dreapta scop · B cumpără · 1/2/Q arme · R reîncărcare · G smoke · Space sărit · Shift mers încet · Ctrl ghemuit. Online: trimite linkul prietenului (invitat în artifact), amândoi introduceți același cod și aceeași hartă.</p></div></div>
+<p class="s">WASD · mouse · click stânga foc · click dreapta scop · B cumpără · 1/2/Q arme · R reîncărcare · G smoke · Space sărit · Shift mers încet · Ctrl ghemuit. Online (1v1 / 2v2): apeși START și intri în LOBBY — vezi cine e online, intri într-un meci deschis sau creezi unul. Poți adăuga prieteni cu ★.</p></div></div>
 <div id="buy"><div class="box"><h1 style="font-size:28px">CUMPĂRARE <span id="bm"></span></h1><div id="bl"></div><button id="bc">ÎNCHIDE (B)</button></div></div><div id="st" class="pn"><div class="box"><h1 style="font-size:28px">SETĂRI</h1><div id="sl"></div><button id="sx">ÎNAPOI</button></div></div><div id="inv" class="pn"><div class="box"><h1 style="font-size:28px">CUTII &amp; SKINURI <span id="co"></span></h1><button id="oc2">DESCHIDE CUTIE · 300 monede</button><div id="cr" class="s" style="font-size:15px;min-height:28px"></div><h3>Inventar (click = echipează)</h3><div id="il" class="row"></div><button id="ix">ÎNAPOI</button></div></div><div id="ov"><div class="box"><h1>PAUZĂ</h1><label class="s">Nume jucător<input id="nm2" maxlength="12"></label><h3>Controale</h3><div class="s" id="ctl" style="font-size:14px;color:#dde"></div><button id="rs">CONTINUĂ</button><button id="bb" style="background:#2a7a3a;color:#fff">CUMPĂRĂ ARME (B)</button><div class="row"><button class="bst" style="background:#444;color:#fff">SETĂRI</button><button class="binv" style="background:#444;color:#fff">CUTII &amp; SKINURI</button></div><button id="mn" style="background:#444;color:#fff">Meniu principal</button></div></div>
 <div id="vg"></div>
+<div id="dev"><div class="box"><h1>CS<span>BROWSER ONLINE</span></h1><h3>Pe ce joci?</h3><div class="row"><div class="o" id="dpc">💻 PC<small>tastatură + mouse</small></div><div class="o" id="dph">📱 Telefon<small>controale pe ecran (ține telefonul orizontal)</small></div></div></div></div>
+<div id="lb" class="pn"><div class="box"><h1 id="lbt" style="font-size:26px"></h1><div class="s" id="lbs"></div>
+<button id="lbc">CREEAZĂ MECI</button>
+<h3>Meciuri deschise (apasă ca să intri)</h3><div id="lbl"></div>
+<h3>Jucători online</h3><div id="lbp"></div><div class="s" id="lbf"></div>
+<button id="lbx" style="background:#444;color:#fff">ÎNAPOI</button></div></div>
+<div id="tc"><div id="lz"></div><div id="jz"></div><div id="jb"><i id="jk"></i></div>
+<div class="tb" data-a="fire" style="right:24px;bottom:30px;width:92px;height:92px">FOC</div>
+<div class="tb" data-a="scope" style="right:128px;bottom:22px;width:60px;height:60px">SCOP</div>
+<div class="tb" data-a="jump" style="right:30px;bottom:136px;width:60px;height:60px">SARI</div>
+<div class="tb" data-a="rel" style="right:104px;bottom:100px;width:52px;height:52px">R</div>
+<div class="tb" data-a="crouch" style="right:176px;bottom:90px;width:50px;height:50px">GHEM</div>
+<div class="tb" data-a="nade" style="right:200px;bottom:22px;width:50px;height:50px">SMK</div>
+<div class="tb sm" data-a="buy" style="top:8px;left:calc(50% + 90px);width:42px;height:38px">B</div>
+<div class="tb sm" data-a="pick" style="top:8px;left:calc(50% + 138px);width:42px;height:38px">E</div>
+<div class="tb sm" data-a="swap" style="top:8px;left:calc(50% + 186px);width:42px;height:38px">⇄</div>
+<div class="tb sm" data-a="pause" style="top:8px;left:calc(50% + 234px);width:42px;height:38px">☰</div></div>
 <canvas id="rad" class="h" width="150" height="150"></canvas>
 <div id="top" class="h"><span id="ct">0</span><b id="tm">1:55</b><span id="tt">0</span></div>
 <div id="feed" class="h"></div><div id="hp" class="h"></div><div id="am" class="h"></div><div id="wl" class="h"></div><div id="mo" class="h"></div><div id="hn" class="h"></div><div id="msg" class="h"></div><div id="dt" class="h"></div><div id="dr" class="h"></div>
@@ -335,10 +368,88 @@ let last=performance.now();
 function loop(now){requestAnimationFrame(loop);const dt=Math.min((now-last)/1000,.05);last=now;if(running){if(locked||buyOpen||online)update(dt);hud()}R.render(S,C)}
 
 // ---- start ----
-$('go').onclick=async()=>{ac();myName=($('nm').value||'Player').slice(0,12);$('nm2').value=myName;mapM=MAPS[mm];buildMap(mapM);need=MODES[ms][3];online=need>1;code=($('cd').value||'meci1').toLowerCase().replace(/[^a-z0-9]/g,'');
+async function launch(){ac();myName=($('nm').value||'Player').slice(0,12);$('nm2').value=myName;mapM=MAPS[mm];buildMap(mapM);need=MODES[ms][3];online=need>1;code=($('cd').value||'meci1').toLowerCase().replace(/[^a-z0-9]/g,'');
  $('menu').style.display='none';running=true;R.domElement.requestPointerLock();
  if(online){try{const r=window.claude&&await claude.use('room');if(r){room=await r.join('cs-'+code+'-'+MODES[ms][0]+'-'+mm);room.on('hit',m=>{if(m.data&&m.data.to===myId&&!m.sameTab)hurt(Math.min(999,+m.data.d||0),m.peer)});
    room.on('shot',m=>{const d=m.data;if(!m.isMe&&d)shotSnd(d.w|0,tv.set(d.x,0,d.z),.9)});room.on('kill',m=>{if(m.data&&m.data.x!==undefined)dropW(m.data.w|0,{x:m.data.x,y:m.data.y,z:m.data.z});if(m.data&&m.data.k===myId)P.money=Math.min(16000,P.money+300);if(!m.isMe&&m.data)feed(nameOf(m.data.k),nameOf(m.peer))});await room.presence({n:myName,tm:pref,a:0,r:0})}}catch(e){room=null}}
- else newRound()};
+ else newRound()}
 requestAnimationFrame(loop);
+
+// ================= DEVICE =================
+let TCH=false;const tcE=$('tc');
+const CTLT='<b>Joystick stânga</b> mișcare · <b>Trage pe dreapta</b> țintire<br><b>FOC</b> tragere · <b>SCOP</b> zoom · <b>SARI</b> · <b>GHEM</b> ghemuit<br><b>R</b> reîncărcare · <b>SMK</b> grenadă · <b>B</b> cumpără · <b>E</b> ridică · <b>⇄</b> schimbă arma<br><b>☰</b> pauză';
+function setDev(t){TCH=t;document.body.classList.toggle('t',t);$('dev').style.display='none';
+ if(t){$('ctl').innerHTML=CTLT;try{const r=document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}try{screen.orientation&&screen.orientation.lock&&screen.orientation.lock('landscape').catch(()=>{})}catch(e){}}}
+$('dpc').onclick=()=>setDev(false);$('dph').onclick=()=>setDev(true);
+
+// ================= TOUCH CONTROLS =================
+{
+ const jz=$('jz'),lz=$('lz'),jb=$('jb'),jk=$('jk');let jid=null,jo=null,lid=null,lp=null;
+ const home=()=>{jb.style.left='90px';jb.style.top=(innerHeight-100)+'px';jk.style.transform=''};home();addEventListener('resize',()=>{if(jid===null)home()});
+ const jset=(x,y)=>{const l=Math.hypot(x,y),s=l>50?50/l:1;x*=s;y*=s;jk.style.transform=`translate(${x}px,${y}px)`;k.KeyW=y<-16?1:0;k.KeyS=y>16?1:0;k.KeyA=x<-16?1:0;k.KeyD=x>16?1:0};
+ const jend=()=>{jid=null;k.KeyW=k.KeyS=k.KeyA=k.KeyD=0;home()};
+ jz.addEventListener('touchstart',e=>{e.preventDefault();if(jid!==null)return;const t=e.changedTouches[0];jid=t.identifier;jo={x:t.clientX,y:t.clientY};jb.style.left=jo.x+'px';jb.style.top=jo.y+'px';jset(0,0)},{passive:false});
+ jz.addEventListener('touchmove',e=>{e.preventDefault();for(const t of e.changedTouches)if(t.identifier===jid)jset(t.clientX-jo.x,t.clientY-jo.y)},{passive:false});
+ const je=e=>{e.preventDefault();for(const t of e.changedTouches)if(t.identifier===jid)jend()};jz.addEventListener('touchend',je,{passive:false});jz.addEventListener('touchcancel',je,{passive:false});
+ lz.addEventListener('touchstart',e=>{e.preventDefault();if(lid!==null)return;const t=e.changedTouches[0];lid=t.identifier;lp={x:t.clientX,y:t.clientY}},{passive:false});
+ lz.addEventListener('touchmove',e=>{e.preventDefault();for(const t of e.changedTouches)if(t.identifier===lid&&locked){const z=(zoom?WP[P.w].z/75*ST.scs:1)*ST.sens;P.yaw-=(t.clientX-lp.x)*.0055*z;P.pitch=Math.max(-1.5,Math.min(1.5,P.pitch-(t.clientY-lp.y)*.0055*z));lp={x:t.clientX,y:t.clientY}}},{passive:false});
+ const le=e=>{e.preventDefault();for(const t of e.changedTouches)if(t.identifier===lid)lid=null};lz.addEventListener('touchend',le,{passive:false});lz.addEventListener('touchcancel',le,{passive:false});
+ const down={
+  fire:()=>{if(!locked||dead)return;fire=true;if(!WP[P.w].au)shoot()},
+  scope:()=>{if(locked&&!dead&&P.rl<=0)zoom=!zoom},
+  jump:()=>{k.Space=1},rel:()=>{if(locked)reload()},
+  crouch:b=>{k.ControlLeft=k.ControlLeft?0:1;b.classList.toggle('on',!!k.ControlLeft)},
+  nade:()=>{if(locked)nade()},buy:()=>toggleBuy(),pick:()=>{if(locked)pickup()},
+  swap:()=>{if(locked)selW(P.w===P.sec&&P.prim>=0?P.prim:P.sec)},
+  pause:()=>{locked=false;fire=false;zoom=false;$('ov').style.display='flex'}};
+ const up={fire:()=>{fire=false},jump:()=>{k.Space=0}};
+ tcE.querySelectorAll('.tb').forEach(b=>{const a=b.dataset.a;
+  b.addEventListener('touchstart',e=>{e.preventDefault();if(running&&down[a])down[a](b)},{passive:false});
+  const u=e=>{e.preventDefault();if(up[a])up[a]()};b.addEventListener('touchend',u,{passive:false});b.addEventListener('touchcancel',u,{passive:false})});
+ $('rs').addEventListener('click',()=>{if(TCH){locked=true;$('ov').style.display='none'}});
+}
+function begin(){launch();if(TCH){locked=true;tcE.style.display='block'}}
+
+// ================= LOBBY =================
+let RM=null,lob=null,lobT=null;
+let FR=[];try{FR=JSON.parse(localStorage.getItem('csfr')||'[]')}catch(e){}
+const saveFr=()=>{try{localStorage.setItem('csfr',JSON.stringify(FR))}catch(e){}};
+const cleanCode=v=>(v||'meci1').toLowerCase().replace(/[^a-z0-9]/g,'');
+const lobPres=s=>{if(lob){try{lob.presence({n:myName,s,m:ms,mp:mm,cd:cleanCode($('cd').value),tm:pref})}catch(e){}}};
+const lobPeers=()=>{try{return lob?lob.peers().filter(p=>p.kind==='viewer'&&p.presence&&p.presence.n):[]}catch(e){return[]}};
+const mine=p=>p.isMe||p.sameTab;
+function mk(tag,txt,cls){const e=document.createElement(tag);if(txt!=null)e.textContent=txt;if(cls)e.className=cls;return e}
+function renderLobby(){
+ const pe=lobPeers(),L=$('lbl'),Pl=$('lbp');L.innerHTML='';Pl.innerHTML='';
+ const g={};
+ pe.forEach(p=>{const q=p.presence;if(q.s==='w'&&MODES[q.m]&&MODES[q.m][3]>1&&MAPS[q.mp]){const key=q.cd+'|'+q.m+'|'+q.mp;(g[key]=g[key]||{cd:q.cd,m:q.m,mp:q.mp,l:[]}).l.push(p)}});
+ const ms2=Object.values(g).filter(x=>x.l.length<MODES[x.m][3]).sort((a,b)=>(b.m===ms)-(a.m===ms));
+ if(!ms2.length)L.appendChild(mk('div','Niciun meci deschis acum. Apasă „CREEAZĂ MECI” și așteaptă alți jucători.','s'));
+ ms2.forEach(x=>{const r=mk('div',null,'lr'),b=mk('b',x.l.map(p=>p.presence.n).join(', '));r.appendChild(b);
+  r.appendChild(mk('em',MODES[x.m][0]+' · '+MAPS[x.mp].n+' · '+x.l.length+'/'+MODES[x.m][3]));
+  if(x.l.some(mine))r.appendChild(mk('em','(tu)'));else{const j=mk('button','INTRĂ');j.onclick=()=>joinM(x);r.appendChild(j)}
+  L.appendChild(r)});
+ const others=pe.filter(p=>!mine(p)).sort((a,b)=>(FR.includes(b.presence.n)-FR.includes(a.presence.n)));
+ if(!others.length)Pl.appendChild(mk('div','Ești singur în lobby deocamdată.','s'));
+ const st={l:'în lobby',w:'așteaptă meci',p:'joacă un meci',m:'în meniu'};
+ others.forEach(p=>{const q=p.presence,isF=FR.includes(q.n),r=mk('div',null,'lr');
+  r.appendChild(mk('b',(isF?'★ ':'')+q.n,isF?'fr':''));r.appendChild(mk('em',st[q.s]||''));
+  const f=mk('button',isF?'★ Prieten':'+ Prieten');f.style.background=isF?'#ffd24a':'#555';f.style.color=isF?'#111':'#fff';
+  f.onclick=()=>{const i=FR.indexOf(q.n);i<0?FR.push(q.n):FR.splice(i,1);saveFr();renderLobby()};r.appendChild(f);Pl.appendChild(r)});
+ const on=new Set(pe.map(p=>p.presence.n)),off=FR.filter(n=>!on.has(n));
+ $('lbf').textContent=FR.length?('Prieteni offline: '+(off.join(', ')||'—')):'Apasă „+ Prieten” ca să-ți salvezi prietenii.';
+}
+async function openLobby(){
+ myName=($('nm').value||'Player').slice(0,12);
+ $('lb').style.display='flex';$('lbt').textContent='LOBBY · '+MODES[ms][1]+' · '+MAPS[mm].n;$('lbs').textContent='Se conectează…';
+ try{if(!RM)RM=window.claude&&await claude.use('room');if(RM&&!lob)lob=await RM.join('cs-lobby-v1')}catch(e){lob=null}
+ if(!lob){$('lbs').textContent='Online indisponibil — deschide jocul din artifact (membru/invitat) ca să vezi lobby-ul.';return}
+ $('lbs').textContent='';lobPres('l');clearInterval(lobT);lobT=setInterval(renderLobby,800);renderLobby();
+}
+function closeLobby(){clearInterval(lobT);$('lb').style.display='none'}
+function joinM(x){ms=x.m;mm=x.mp;$('cd').value=x.cd;lobPres('w');closeLobby();begin()}
+$('lbc').onclick=()=>{if(!lob)return;let c=cleanCode($('cd').value);if(c==='meci1'||!$('cd').value)c=Math.random().toString(36).slice(2,7);$('cd').value=c;lobPres('w');closeLobby();begin()};
+$('lbx').onclick=()=>{lobPres('m');closeLobby()};
+setInterval(()=>{if(lob&&online&&running)lobPres(started?'p':'w')},1500);
+$('go').onclick=()=>{if(MODES[ms][3]>1)openLobby();else begin()};
 </script></body></html>
