@@ -585,10 +585,10 @@ body.t #rl{font-size:12px;top:46%;gap:18px;padding:8px 12px}
 
 #top,#hp,#am,#mo{display:none!important}
 #wl{bottom:64px!important;right:14px!important;opacity:1!important;font-size:11px!important;color:#ccd}
-#wl .wcs{display:flex;gap:6px;justify-content:flex-end;margin-bottom:3px}
-#wl .wc2{position:relative;width:112px;padding:4px 4px 3px;background:#000a;border:2px solid #fff3;border-radius:6px;text-align:center;opacity:.6}
+#wl .wcs{display:flex;flex-direction:column;gap:5px;align-items:flex-end;margin-bottom:3px}
+#wl .wc2{position:relative;width:156px;padding:4px 4px 3px;background:#000a;border:2px solid #fff3;border-radius:6px;text-align:center;opacity:.6}
 #wl .wc2.on{opacity:1;border-color:#ffd24a;background:#2a2410cc;box-shadow:0 0 10px #ffd24a66}
-#wl .wc2 img{width:100%;height:40px;object-fit:contain;display:block}
+#wl .wc2 img{width:144px;height:64px;object-fit:contain;display:block;margin:0 auto}
 #wl .wc2 .k{position:absolute;left:5px;top:2px;font-weight:800;font-size:12px;color:#ffd24a}
 #wl .wc2 .nm{font-weight:800;font-size:12px;color:#fff;line-height:1.1}
 #wl .wc2 small{font-size:10px;color:#9fe}
@@ -2231,6 +2231,7 @@ function selW(i){
 }
 function mkMe(){
   me=mkChar(myTeam);
+  me.g.scale.set(1,1,1);
   me.g.children.forEach(o=>{
     if(o.name==='fa'||o===me.gm||(!o.isGroup&&o.position.y>1.5&&o.position.y<2.2))o.visible=false
   });
@@ -2351,6 +2352,7 @@ function mkChar(team){
   const gm=gun(team?8:9);
   gm.position.set(.14,1.1,-.08);
   g.add(gm);
+  g.scale.set(1.4,1.22,1.4);
   S.add(g);
   const c={
     g,parts,M,legs,gm,vi:vv,look:-1,hp:100,cd:1,seeT:0,av:0,avT:0,sd:1,sees:false
