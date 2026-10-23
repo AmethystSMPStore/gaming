@@ -905,7 +905,7 @@ R.shadowMap.type=T.PCFSoftShadowMap;
 R.toneMapping=T.ACESFilmicToneMapping;
 R.toneMappingExposure=1.15;
 document.body.prepend(R.domElement);
-const S=new T.Scene(),C=new T.PerspectiveCamera(75,innerWidth/innerHeight,.05,300);
+const S=new T.Scene(),C=new T.PerspectiveCamera(75,innerWidth/innerHeight,.05,450);
 S.add(C);
 const HL=new T.HemisphereLight(0xe6f0ff,0xc9a36a,.95);
 S.add(HL);
@@ -918,12 +918,12 @@ S.add(sun);
 sun.castShadow=!!ST.shd;
 sun.shadow.mapSize.set(2048,2048);
 const sc3=sun.shadow.camera;
-sc3.left=-65;
-sc3.right=65;
-sc3.top=65;
-sc3.bottom=-65;
+sc3.left=-115;
+sc3.right=115;
+sc3.top=115;
+sc3.bottom=-115;
 sc3.near=1;
-sc3.far=160;
+sc3.far=280;
 sun.shadow.bias=-.0004;
 sun.shadow.normalBias=.03;
 addEventListener('resize',()=>{
@@ -971,8 +971,9 @@ gr.addColorStop(1,'rgba(215,220,225,0)');
 sx.fillStyle=gr;
 sx.fillRect(0,0,64,64);
 const smokeTex=new T.CanvasTexture(sc2);
+const MK=1.7;
 const HILL={
-  x:28,z:-30,r:9,h:3.6
+  x:28*MK,z:-30*MK,r:9*MK,h:3.6
 },hillY=(x,z)=>{
   const d=Math.hypot(x-HILL.x,z-HILL.z)/HILL.r;
   if(d>=1)return 0;
@@ -1091,7 +1092,7 @@ function wall(x,z,w,d,h,c,tint){
 }
 function buildMap(M){
   S.background=new T.Color(M.s);
-  S.fog=new T.Fog(M.f,30,120);
+  S.fog=new T.Fog(M.f,45,210);
   HL.groundColor.setHex(M.h);
   {
     const nr=22,ns=56,pos=[],uv=[],idx=[];
@@ -1147,25 +1148,25 @@ function buildMap(M){
     su.scale.setScalar(90);
     S.add(su)
   }
-  const g=new T.Mesh(new T.PlaneGeometry(100,100),new T.MeshStandardMaterial({
-    map:tex(25,25),bumpMap:tex(25,25),bumpScale:1.2,color:M.g,roughness:.95
+  const g=new T.Mesh(new T.PlaneGeometry(100*MK,100*MK),new T.MeshStandardMaterial({
+    map:tex(25*MK,25*MK),bumpMap:tex(25*MK,25*MK),bumpScale:1.2,color:M.g,roughness:.95
   }));
   g.rotation.x=-Math.PI/2;
   g.receiveShadow=true;
   S.add(g);
   wm.push(g);
-  wall(0,-40,82,2,12,M.w,1);
-  wall(0,40,82,2,12,M.w,1);
-  wall(-40,0,2,82,12,M.w,1);
-  wall(40,0,2,82,12,M.w,1);
-  M.W.forEach(w=>wall(w[0],w[1],w[2],w[3],w[4],w[5]||M.w));
+  wall(0,-40*MK,82*MK,2,12,M.w,1);
+  wall(0,40*MK,82*MK,2,12,M.w,1);
+  wall(-40*MK,0,2,82*MK,12,M.w,1);
+  wall(40*MK,0,2,82*MK,12,M.w,1);
+  M.W.forEach(w=>{const k=v=>v>=5?v*MK:v;wall(w[0]*MK,w[1]*MK,k(w[2]),k(w[3]),w[4],w[5]||M.w)});
   if(M.palm){
     const wo=new T.MeshLambertMaterial({
       color:0x7a5a30
     }),lf=new T.MeshLambertMaterial({
       color:0x4f7a2a
     });
-    [[-8,-30],[18,-6],[-32,-20],[32,-32],[-20,34],[30,24]].forEach(([x,z])=>{
+    [[-8,-30],[18,-6],[-32,-20],[32,-32],[-20,34],[30,24]].forEach(([x,z])=>{x*=MK;z*=MK;
       const t=new T.Mesh(new T.CylinderGeometry(.25,.35,7,6),wo);
       t.position.set(x,3.5,z);
       S.add(t);
@@ -2614,7 +2615,7 @@ function newRound(){
     idx=ids().filter(x=>teamOf(x)===myTeam).indexOf(myId)
   }else myTeam=pref;
   if(P.sec<=1)P.sec=myTeam?1:0;
-  P.pos.set(-6+idx*12+(Math.random()-.5)*3,0,myTeam?-34:34);
+  P.pos.set(-6+idx*12+(Math.random()-.5)*3,0,(myTeam?-34:34)*MK);
   P.yaw=myTeam?Math.PI:0;
   if(!online||QM)spawnBots();
   dead=false;
@@ -3792,14 +3793,14 @@ function setCdn(v){
 }
 let BK=1;
 function spawnBots(){
-  const n=QM?5:BOTN,per=6,z0=myTeam?34:-34,dz=myTeam?-5:5;
+  const n=QM?5:BOTN,per=6,z0=(myTeam?34:-34)*MK,dz=myTeam?-5:5;
   BK=n<=3?1:Math.max(.35,Math.sqrt(3/n));
   for(let i=0;i<n;i++){
     const row=Math.floor(i/per),cnt=Math.min(per,n-row*per),col=i%per,b=mkChar(1-myTeam);
     b.wi=rwi(1-myTeam);
     b.name=QM?QR[i%QR.length]:'Bot '+(i+1);
     b.parts.forEach(p=>p.userData.bot=b);
-    b.g.position.set(-30+(60/cnt)*(col+.5)+(Math.random()-.5)*3,0,z0+dz*row+(Math.random()-.5)*2);
+    b.g.position.set(-30*MK+(60*MK/cnt)*(col+.5)+(Math.random()-.5)*3,0,z0+dz*row+(Math.random()-.5)*2);
     resolve(b.g.position,.4,0);
     bots.push(b);
   }
@@ -4412,5 +4413,155 @@ else{CUR='';upAcct();lg.style.display='flex'}
     row.appendChild(d)});
   document.querySelector('#menu .box h1').before(row)
 }
+// ===================== v8 PATCH: grenade shop · ESC · team pick · match history · flag · knife =====================
+// 1) BUY GRENADES in the buy menu (round start / freeze time)
+{
+  const GR=[['smk','Smoke','☁',300,2],['he','HE grenade','💣',300,1],['fl','Flashbang','✨',200,2],['mo','Molotov','🔥',400,1],['de','Decoy','📡',50,1]];
+  const cnt=k=>k==='smk'?P.smk:((P.gx&&P.gx[k])||0);
+  const _rb=renderBuy;
+  renderBuy=function(){
+    _rb();
+    const L=$('bl'),cf=$('bcf');
+    if(!L||!cf)return;
+    const h=document.createElement('h3');h.textContent='Grenades (click = buy)';
+    const r=document.createElement('div');r.className='row';
+    GR.forEach(([k,n,ic,p,mx])=>{
+      const e=document.createElement('div'),c=cnt(k),full=c>=mx;
+      e.className='o bw'+(full?' on':'');
+      e.style.opacity=(P.money>=p||full)?1:.4;
+      e.innerHTML='<div class="nm">'+n+'</div><div style="font-size:40px;height:56px">'+ic+'</div><div class="pr">'+(full?'MAX':'$'+p)+' · '+c+'/'+mx+'</div>';
+      e.onclick=()=>{
+        if(full||P.money<p||freeze<=0||dead)return;
+        P.money-=p;
+        if(k==='smk')P.smk++;else{P.gx=P.gx||{};P.gx[k]=(P.gx[k]||0)+1}
+        snd({d:.08,f:1500,v:.5});
+        renderBuy();
+        try{hud()}catch(e){}
+      };
+      r.appendChild(e);
+    });
+    L.insertBefore(h,cf);L.insertBefore(r,cf);
+  };
+}
+
+// 2) ESC closes / goes back from any panel
+addEventListener('keydown',e=>{
+  if(e.code!=='Escape'||kbCap)return;
+  const tc=$('tmc');
+  if(tc){tc.remove();lobPres('l');openLobby();return}
+  const ar=$('ar');
+  if(ar&&getComputedStyle(ar).display!=='none'){ar.style.display='none';return}
+  if(buyOpen){toggleBuy(false);return}
+  const pn=[...document.querySelectorAll('.pn')].find(x=>getComputedStyle(x).display!=='none');
+  if(pn){
+    if(pn.id==='lb'){$('lbx').click();return}
+    const bs=[...pn.querySelectorAll('button')];
+    const b=bs.find(x=>/back|close|exit|înapoi/i.test(x.textContent))||bs[bs.length-1];
+    if(b)b.click();
+  }
+},true);
+
+// 3) TEAM PICK when creating / joining an online match (2v2 etc.)
+{
+  let chosen=false;
+  const _b=begin;
+  begin=function(){
+    if(chosen||ms<1){chosen=false;return _b()}
+    const cap=MODES[ms][3]/2,cd=cleanCode($('cd').value),c=[0,0];
+    lobPeers().forEach(p=>{const q=p.presence;if(!mine(p)&&q.cd===cd&&(q.s==='w'||q.s==='p'))c[q.tm?1:0]++});
+    let o=$('tmc');if(o)o.remove();
+    o=document.createElement('div');o.id='tmc';
+    o.style.cssText='position:fixed;inset:0;z-index:40;display:flex;align-items:center;justify-content:center;background:#000d';
+    const bx=document.createElement('div');bx.className='box';bx.style.textAlign='center';
+    bx.innerHTML='<h1 style="font-size:28px">CHOOSE YOUR TEAM</h1><div class="s">'+MODES[ms][1]+' · '+MAPS[mm].n+' · code '+cd+' · Esc = back</div>';
+    const row=document.createElement('div');row.className='row';row.style.marginTop='16px';
+    [['CT','#6ea8ff',0],['T','#f5a623',1]].forEach(([n,col,i])=>{
+      const full=c[i]>=cap,b=document.createElement('div');
+      b.className='o';
+      b.style.cssText='border-color:'+col+';color:'+col+';font-size:26px;padding:22px;opacity:'+(full?.35:1);
+      b.innerHTML=n+'<small>'+c[i]+'/'+cap+(full?' · full':'')+'</small>';
+      b.onclick=()=>{if(full)return;pref=i;o.remove();chosen=true;begin()};
+      row.appendChild(b);
+    });
+    bx.appendChild(row);o.appendChild(bx);document.body.appendChild(o);
+  };
+}
+
+// 4) LOBBY: list of everyone who created matches recently (kept locally)
+{
+  let MH=[];
+  try{MH=JSON.parse(localStorage.getItem('csmh')||'[]')}catch(e){}
+  const rec=()=>{
+    lobPeers().forEach(p=>{
+      const q=p.presence;
+      if((q.s==='w'||q.s==='p')&&MODES[q.m]&&MODES[q.m][3]>1){
+        const k=q.n+'|'+q.cd+'|'+q.m;
+        const h=MH.find(x=>x.k===k);
+        if(h){h.t=Date.now();h.s=q.s}
+        else MH.unshift({k,n:q.n,m:q.m,mp:q.mp,cd:q.cd,s:q.s,t:Date.now()});
+      }
+    });
+    MH=MH.slice(0,40);
+    try{localStorage.setItem('csmh',JSON.stringify(MH))}catch(e){}
+  };
+  setInterval(rec,2000);
+  const hd=document.createElement('h3');hd.textContent='Players who created matches';
+  const hl=document.createElement('div');hl.id='lbh';
+  $('lbl').after(hd,hl);
+  const ago=t=>{const s=(Date.now()-t)/1000|0;return s<60?'just now':s<3600?(s/60|0)+' min ago':(s/3600|0)+' h ago'};
+  const _rl=renderLobby;
+  renderLobby=function(){
+    _rl();
+    hl.innerHTML='';
+    if(!MH.length)hl.appendChild(mk('div','Nobody has created a match yet.','s'));
+    MH.slice(0,12).forEach(h=>{
+      const r=mk('div',null,'lr');
+      r.appendChild(mk('b',h.n));
+      const live=Date.now()-h.t<5000;
+      r.appendChild(mk('em',(MODES[h.m]?MODES[h.m][0]:'')+' · '+(MAPS[h.mp]?MAPS[h.mp].n:'')+' · '+(live?(h.s==='p'?'playing now':'waiting'):ago(h.t))));
+      hl.appendChild(r);
+    });
+  };
+}
+
+// 5) COUNTRY FLAG in the top-right corner
+{
+  const TZ={'Europe/Bucharest':'RO','Europe/Chisinau':'MD','Europe/London':'GB','Europe/Paris':'FR','Europe/Berlin':'DE','Europe/Madrid':'ES','Europe/Rome':'IT','Europe/Warsaw':'PL','Europe/Budapest':'HU','Europe/Sofia':'BG','Europe/Athens':'GR','Europe/Istanbul':'TR','Europe/Kiev':'UA','Europe/Kyiv':'UA','Europe/Moscow':'RU','Europe/Amsterdam':'NL','Europe/Brussels':'BE','Europe/Vienna':'AT','Europe/Prague':'CZ','Europe/Stockholm':'SE','Europe/Lisbon':'PT','Europe/Dublin':'IE','America/New_York':'US','America/Chicago':'US','America/Los_Angeles':'US','America/Denver':'US','America/Toronto':'CA','America/Sao_Paulo':'BR','Asia/Tokyo':'JP','Asia/Kolkata':'IN','Australia/Sydney':'AU'};
+  let cc='';
+  try{cc=TZ[Intl.DateTimeFormat().resolvedOptions().timeZone]||((navigator.language||'').split('-')[1]||'')}catch(e){}
+  try{cc=localStorage.getItem('cscc')||cc}catch(e){}
+  cc=(cc||'').toUpperCase();
+  const d=document.createElement('div');
+  d.id='flg';
+  d.style.cssText='position:fixed;right:16px;top:44px;z-index:30;display:flex;align-items:center;gap:6px;background:#000a;padding:4px 8px;border-radius:5px;border:1px solid #fff3;font:700 13px system-ui;pointer-events:none';
+  const show=c=>{
+    if(!/^[A-Z]{2}$/.test(c)){d.style.display='none';return}
+    d.style.display='flex';
+    const em=String.fromCodePoint(...[...c].map(x=>127397+x.charCodeAt(0)));
+    d.innerHTML='<img src="https://flagcdn.com/w40/'+c.toLowerCase()+'.png" width="28" height="20" style="border-radius:2px;display:block" alt=""><span>'+c+'</span>';
+    d.firstChild.onerror=function(){this.replaceWith(Object.assign(document.createElement('span'),{textContent:em,style:'font-size:18px'}))};
+  };
+  document.body.appendChild(d);
+  show(cc);
+  fetch('https://get.geojs.io/v1/ip/country.json').then(r=>r.json()).then(j=>{
+    if(j&&/^[A-Z]{2}$/.test(j.country||'')){cc=j.country;try{localStorage.setItem('cscc',cc)}catch(e){}show(cc)}
+  }).catch(()=>{});
+}
+
+// 6) NICER STANDARD KNIFE: glowing edge line + red gem on the pommel
+{
+  const _k=knifeM;
+  knifeM=function(i){
+    const g=_k(i);
+    if(i===12){
+      const edge=new T.MeshBasicMaterial({color:0x9fe8ff,transparent:true,opacity:.6});
+      const gem=new T.MeshPhongMaterial({color:0xd01030,shininess:300,specular:0xffffff,emissive:0x400008});
+      const a=new T.Mesh(new T.BoxGeometry(.0012,.0016,.27),edge);a.position.set(0,-.0435,-.33);g.add(a);
+      const s=new T.Mesh(new T.SphereGeometry(.0085,16,12),gem);s.position.set(0,-.015,.03);g.add(s);
+    }
+    return g;
+  };
+}
+
 cloudInit();
 </script></body></html>
