@@ -584,7 +584,14 @@ body.t #cdn {
 body.t #rl{font-size:12px;top:46%;gap:18px;padding:8px 12px}
 
 #top,#hp,#am,#mo{display:none!important}
-#wl{bottom:74px!important;opacity:.55;font-size:12px!important}
+#wl{bottom:64px!important;right:14px!important;opacity:1!important;font-size:11px!important;color:#ccd}
+#wl .wcs{display:flex;gap:6px;justify-content:flex-end;margin-bottom:3px}
+#wl .wc2{position:relative;width:112px;padding:4px 4px 3px;background:#000a;border:2px solid #fff3;border-radius:6px;text-align:center;opacity:.6}
+#wl .wc2.on{opacity:1;border-color:#ffd24a;background:#2a2410cc;box-shadow:0 0 10px #ffd24a66}
+#wl .wc2 img{width:100%;height:40px;object-fit:contain;display:block}
+#wl .wc2 .k{position:absolute;left:5px;top:2px;font-weight:800;font-size:12px;color:#ffd24a}
+#wl .wc2 .nm{font-weight:800;font-size:12px;color:#fff;line-height:1.1}
+#wl .wc2 small{font-size:10px;color:#9fe}
 #tpn{position:fixed;left:50%;top:0;transform:translateX(-50%);display:flex;align-items:stretch;z-index:5;pointer-events:none;font-family:inherit}
 #tpn .sd{display:flex;gap:2px;background:#0b0d12cc;padding:4px 4px 3px}
 #tpn .sl{width:42px;text-align:center;font-size:10px;color:#fff;line-height:1.25}
@@ -3262,7 +3269,7 @@ function hud(){
   $('tt').textContent=s1;
   $('hp').innerHTML='<small style="font-size:16px;color:#ccc">♥ HEALTH</small> '+Math.ceil(P.hp)+'<div style="width:200px;height:9px;background:#0008;border-radius:5px;margin-top:2px;border:1px solid #fff3"><div style="width:'+P.hp+'%;height:100%;border-radius:5px;background:'+(P.hp>50?'#4c4':P.hp>25?'#ec3':'#e33')+'"></div></div>';
   $('am').innerHTML=(P.rl>0?'<small>reload </small>':'')+(WP[P.w].kn?'🔪':P.am[P.w]+' <small>/ '+P.rs[P.w]+'</small>')+(P.smk?'<div style="font-size:14px;color:#ccc">☁ smoke ×'+P.smk+'</div>':'');
-  $('wl').innerHTML=[P.prim,P.sec,P.kn].map((i,n)=>i<0?'':(i===P.w?'<b>':'')+(n+1)+' '+WP[i].n+' · '+WP[i].d+' dmg'+(i===P.w?'</b>':'')).join('<br>')+'<br>B buy · Q swap · I inventory · hold Tab scoreboard';
+  $('wl').innerHTML='<div class="wcs">'+[P.prim,P.sec,P.kn].map((i,n)=>{if(i<0)return'';let im='';try{im=thumb(i)}catch(e){}return'<div class="wc2'+(i===P.w?' on':'')+'"><span class="k">'+(n+1)+'</span><img src="'+im+'"><div class="nm">'+WP[i].n+'</div><small>'+(WP[i].kn?'knife':WP[i].d+' dmg · '+P.am[i]+'/'+P.rs[i])+'</small></div>'}).join('')+'</div>B buy · Q swap · I inventory · hold Tab scoreboard';
   $('mo').textContent='$'+P.money;
   {
     const n=nearDrop();
