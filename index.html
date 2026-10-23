@@ -1160,6 +1160,7 @@ function buildMap(M){
   wall(-40*MK,0,2,82*MK,12,M.w,1);
   wall(40*MK,0,2,82*MK,12,M.w,1);
   M.W.forEach(w=>{const k=v=>v>=5?v*MK:v;wall(w[0]*MK,w[1]*MK,k(w[2]),k(w[3]),w[4],w[5]||M.w)});
+  extras(M,MAPS.indexOf(M));
   if(M.palm){
     const wo=new T.MeshLambertMaterial({
       color:0x7a5a30
@@ -1177,6 +1178,68 @@ function buildMap(M){
         S.add(l)
       }
     })
+  }
+}
+// ---- case cu usi, structuri extra ----
+function hseed(str){let h=2166136261;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
+function mkRng(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function house(x,z,w,d,h,col,doors){
+  const t=1,gap=3.6;
+  const roofM=new T.MeshStandardMaterial({color:new T.Color(col).multiplyScalar(.8),roughness:.9});
+  const lintM=new T.MeshStandardMaterial({color:col,roughness:.85});
+  // side: 'n'(z-),'s'(z+),'w'(x-),'e'(x+)
+  const sides=[
+    {k:'n',cx:x,cz:z-d/2,len:w,hor:1},{k:'s',cx:x,cz:z+d/2,len:w,hor:1},
+    {k:'w',cx:x-w/2,cz:z,len:d,hor:0},{k:'e',cx:x+w/2,cz:z,len:d,hor:0}
+  ];
+  sides.forEach(sd=>{
+    const has=doors.indexOf(sd.k)>=0;
+    const put=(c,l)=>{if(l<.3)return;sd.hor?wall(c,sd.cz,l,t,h,col):wall(sd.cx,c,t,l,h,col)};
+    const c0=sd.hor?sd.cx:sd.cz;
+    if(!has){put(c0,sd.len);return}
+    const l1=(sd.len-gap)/2;
+    put(c0-sd.len/2+l1/2,l1);
+    put(c0+sd.len/2-l1/2,l1);
+    const lm=new T.Mesh(new T.BoxGeometry(sd.hor?gap:t,h-3.4,sd.hor?t:gap),lintM);
+    lm.position.set(sd.cx,3.4+(h-3.4)/2,sd.cz);
+    lm.castShadow=lm.receiveShadow=true;S.add(lm);wm.push(lm)
+  });
+  const rf=new T.Mesh(new T.BoxGeometry(w+.6,.5,d+.6),roofM);
+  rf.position.set(x,h+.25,z);rf.castShadow=rf.receiveShadow=true;S.add(rf);wm.push(rf);
+  const fl=new T.Mesh(new T.PlaneGeometry(w-t,d-t),new T.MeshStandardMaterial({color:0xcfc6b4,roughness:.95,polygonOffset:true,polygonOffsetFactor:-3,polygonOffsetUnits:-3}));
+  fl.rotation.x=-Math.PI/2;fl.position.set(x,.03,z);fl.receiveShadow=true;S.add(fl);
+  // cutii in interior
+  if(w>=14&&d>=12){
+    wall(x-w/4,z-d/4+.5,2.2,2.2,1.4,0x9a7a52);
+    wall(x+w/4,z+d/4-.5,2.6,2,1.6,0x8a6a3a)
+  }
+}
+function extras(M,mi){
+  const R=mkRng(hseed(M.n+'#'+mi)),skip=[];
+  const near=(x,z,hw,hd,m)=>boxes.some(b=>x+hw+m>b.x0&&x-hw-m<b.x1&&z+hd+m>b.z0&&z-hd-m<b.z1)||skip.some(q=>Math.abs(x-q[0])<hw+q[2]+m&&Math.abs(z-q[1])<hd+q[3]+m)||Math.hypot(x-HILL.x,z-HILL.z)<HILL.r+Math.max(hw,hd)+2;
+  const cols=[M.w,M.w,0xd8c8a8,0xc8b090,0xb8a888,0xc9b9a0];
+  let n=0;
+  for(let a=0;a<900&&n<8;a++){
+    const big=a<450,w=(big?15:11)+Math.floor(R()*(big?9:5)),d=(big?13:10)+Math.floor(R()*(big?7:4)),h=6+Math.floor(R()*3);
+    const x=Math.round((R()*2-1)*(60-w/2)),z=Math.round((R()*2-1)*(36-d/2));
+    if(near(x,z,w/2,d/2,3.5))continue;
+    const all=['n','s','w','e'],ds=[],f=R();
+    ds.push(z>0?'n':'s');
+    ds.push(x>0?'w':'e');
+    if(f>.45)ds.push(z>0?'s':'n');
+    house(x,z,w,d,h,cols[Math.floor(R()*cols.length)],ds);
+    skip.push([x,z,w/2,d/2]);n++
+  }
+  // structuri mici: containere, ziduri joase, turnuri
+  let m=0;
+  for(let a=0;a<400&&m<16;a++){
+    const kind=R(),x=Math.round((R()*2-1)*58),z=Math.round((R()*2-1)*34);
+    let w,d,h,c=M.w;
+    if(kind<.45){w=3+Math.floor(R()*3);d=3+Math.floor(R()*3);h=1.6+R()*1.2;c=0x8a6a3a}
+    else if(kind<.8){const hz=R()>.5;w=hz?9+Math.floor(R()*6):1.6;d=hz?1.6:9+Math.floor(R()*6);h=2.4;c=M.w}
+    else{w=6;d=6;h=4.6;c=0x9a9a88}
+    if(near(x,z,w/2,d/2,3))continue;
+    wall(x,z,w,d,h,c);skip.push([x,z,w/2,d/2]);m++
   }
 }
 function resolve(p,r,fy){
@@ -2566,11 +2629,11 @@ function end(w){
   else s1++;
   if(myTeam===w){P.money=Math.min(16000,P.money+3250);lossS=0}else{P.money=Math.min(16000,P.money+LB[Math.min(lossS,4)]);lossS++}
   banner=(w===0?'Counter-Terrorists':'Terrorists')+' win the round';
-  if(s0>=13||s1>=13){
-    const win=(myTeam===(s0>=13?0:1)),g=Math.round((win?400:150)*cm());
+  if(s0+s1>=6&&s0!==s1){
+    const win=(myTeam===(s0>s1?0:1)),g=win?500:Math.round(150*cm());
     WS.coins+=g;
     saveW();
-    banner=(win?'🏆 You won the match!':'You lost the match')+' · +'+g+' coins';
+    banner=(win?'🏆 Ai câștigat meciul!':'Ai pierdut meciul')+' ('+s0+' - '+s1+') · +'+g+' monede';
     setTimeout(()=>{
       s0=s1=0;SBR={};PCM={};lossS=0;P.ar=0;
       rnd=0;
@@ -2580,8 +2643,12 @@ function end(w){
       dead=false;
       newRound()
     },6500)
-  }else setTimeout(newRound,3600)
+  }else{
+    if(s0+s1>=6)banner+=' · Egalitate '+s0+'-'+s1+' → rundă decisivă!';
+    setTimeout(newRound,3600)
+  }
 }
+let dcT=0,dcOver=false;
 function newRound(){
   mxS=[0,0];
   gf.forEach(g=>g.m&&S.remove(g.m));gf.length=0;
@@ -2649,6 +2716,19 @@ function update(dt){
       renderWait(pe)
     }
   }
+  if(online&&started&&!QM&&!dcOver){
+    if(pe.length<need){
+      dcT+=dt;
+      if(dcT>2.5){
+        dcOver=true;over=true;dead=false;fire=false;zoom=false;freeze=0;
+        banner='🔴 Un jucător a ieșit din meci — meciul s-a închis. Revii în meniu...';
+        try{document.exitPointerLock()}catch(e){}
+        try{room&&room.leave&&room.leave()}catch(e){}
+        setTimeout(()=>location.reload(),4000)
+      }
+    }else dcT=0
+  }
+  if(dcOver)return;
   if(started||!online){
     if(freeze>0){
       freeze-=dt;
